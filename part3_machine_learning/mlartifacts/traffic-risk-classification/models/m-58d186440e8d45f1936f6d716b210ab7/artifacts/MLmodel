@@ -1,0 +1,57 @@
+artifact_path: file:///C:/Users/User/OneDrive/Labs/CAPSTONE%20PROJECT/smart-city-traffic-capstone/part3_machine_learning/mlartifacts/traffic-risk-classification/models/m-58d186440e8d45f1936f6d716b210ab7/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.13.9
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.15.1
+model_id: m-58d186440e8d45f1936f6d716b210ab7
+model_size_bytes: 624415
+model_uuid: m-58d186440e8d45f1936f6d716b210ab7
+prompts: null
+run_id: 3d609e9b733440559a7d42c243ef85de
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "hour", "required": true}, {"type": "double",
+    "name": "day_of_week", "required": true}, {"type": "double", "name": "month",
+    "required": true}, {"type": "double", "name": "is_weekend", "required": true},
+    {"type": "double", "name": "is_holiday", "required": true}, {"type": "double",
+    "name": "is_rush_hour", "required": true}, {"type": "double", "name": "hour_sin",
+    "required": true}, {"type": "double", "name": "hour_cos", "required": true}, {"type":
+    "double", "name": "dow_sin", "required": true}, {"type": "double", "name": "dow_cos",
+    "required": true}, {"type": "double", "name": "month_sin", "required": true},
+    {"type": "double", "name": "month_cos", "required": true}, {"type": "double",
+    "name": "temp_c", "required": true}, {"type": "double", "name": "rain_1h_log",
+    "required": true}, {"type": "double", "name": "snow_1h", "required": true}, {"type":
+    "double", "name": "clouds_all", "required": true}, {"type": "double", "name":
+    "is_precipitation", "required": true}, {"type": "double", "name": "is_low_visibility",
+    "required": true}, {"type": "double", "name": "is_severe_weather", "required":
+    true}, {"type": "double", "name": "is_freezing", "required": true}, {"type": "double",
+    "name": "weather_severity", "required": true}, {"type": "double", "name": "weather_Clear",
+    "required": true}, {"type": "double", "name": "weather_Clouds", "required": true},
+    {"type": "double", "name": "weather_Drizzle", "required": true}, {"type": "double",
+    "name": "weather_Fog", "required": true}, {"type": "double", "name": "weather_Haze",
+    "required": true}, {"type": "double", "name": "weather_Mist", "required": true},
+    {"type": "double", "name": "weather_Rain", "required": true}, {"type": "double",
+    "name": "weather_Smoke", "required": true}, {"type": "double", "name": "weather_Snow",
+    "required": true}, {"type": "double", "name": "weather_Squall", "required": true},
+    {"type": "double", "name": "weather_Thunderstorm", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-09-14 09:16:46.050676'

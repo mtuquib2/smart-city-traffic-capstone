@@ -1,0 +1,5 @@
+cluster,hours,mean_volume,typical_hour,hour_concentration,weekend_share,mean_weather_severity,adverse_weather_share,severe_congestion_share,proxy_high_risk_share,dominant_weather,mean_temp_c,share_of_hours,name
+0,13081,1037.3730,1.9220,0.7984,0.3270,0.2742,0.0000,0.0000,0.0001,Clear,6.5525,0.3224,"Low traffic, night, mixed days"
+1,3088,3005.7989,3.9078,0.0313,0.2778,2.4537,1.0000,0.1775,0.0615,Snow,0.8399,0.0761,"Moderate traffic, all hours, mixed days, adverse weather"
+2,11409,4196.2181,18.1523,0.8527,0.2920,0.1850,0.0000,0.2955,0.0264,Clouds,11.4188,0.2812,"Heavy traffic, afternoon-evening, mixed days"
+3,12997,4839.1515,10.2789,0.8010,0.2407,0.2539,0.0000,0.4788,0.1104,Clouds,8.8821,0.3203,"Heavy traffic, morning-midday, mixed days"

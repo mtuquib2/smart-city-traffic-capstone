@@ -1,0 +1,19 @@
+segment_type,segment,rate,positives,hours
+weather_group,Clear,0.0000,0,13366
+weather_group,Cloudy,0.0000,0,15123
+weather_group,Low visibility,0.4288,1737,4051
+weather_group,Rain/Drizzle,0.0000,0,5284
+weather_group,Snow,0.0000,0,2297
+weather_group,Thunderstorm/Squall,0.4185,190,454
+hour_band,AM peak 06-09,0.1281,856,6683
+hour_band,Evening 19-23,0.0048,41,8555
+hour_band,Midday 10-14,0.0788,665,8434
+hour_band,Night 00-05,0.0000,0,10187
+hour_band,PM peak 15-18,0.0543,365,6716
+day_type,Holiday,0.0382,46,1203
+day_type,Weekday,0.0569,1581,27776
+day_type,Weekend,0.0259,300,11596
+season,Autumn,0.0421,392,9315
+season,Spring,0.0402,415,10314
+season,Summer,0.0396,445,11250
+season,Winter,0.0696,675,9696

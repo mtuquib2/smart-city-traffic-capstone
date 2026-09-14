@@ -1,0 +1,58 @@
+{
+  "version": "3",
+  "candidate": "hist_gradient_boosting_v1",
+  "algorithm": "HistGradientBoostingRegressor",
+  "params": {
+    "learning_rate": 0.1,
+    "max_iter": 200,
+    "max_leaf_nodes": 31
+  },
+  "validation": {
+    "mae": 231.5429264719118,
+    "rmse": 365.57435569281546,
+    "r2": 0.965995372946494
+  },
+  "test": {
+    "mae": 217.31660463770268,
+    "rmse": 363.8751155330456,
+    "r2": 0.9660363215302563
+  },
+  "train_seconds": 0.6474040999892168,
+  "mlflow_run_id": "9e25d9cd785f4dd9b8a6d46b27e5c1e8",
+  "trained_on": "2012-10-02 to 2017-12-31",
+  "is_champion": true,
+  "features": [
+    "hour",
+    "day_of_week",
+    "month",
+    "is_weekend",
+    "is_holiday",
+    "is_rush_hour",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "month_sin",
+    "month_cos",
+    "temp_c",
+    "rain_1h_log",
+    "snow_1h",
+    "clouds_all",
+    "is_precipitation",
+    "is_low_visibility",
+    "is_severe_weather",
+    "is_freezing",
+    "weather_severity",
+    "weather_Clear",
+    "weather_Clouds",
+    "weather_Drizzle",
+    "weather_Fog",
+    "weather_Haze",
+    "weather_Mist",
+    "weather_Rain",
+    "weather_Smoke",
+    "weather_Snow",
+    "weather_Squall",
+    "weather_Thunderstorm"
+  ]
+}

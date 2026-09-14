@@ -1,0 +1,28 @@
+2026-09-14 17:20:27 | INFO     | server | Started server process [24728]
+2026-09-14 17:20:27 | INFO     | on | Waiting for application startup.
+2026-09-14 17:20:28 | INFO     | recommender | Travel recommender ready (regressor + risk classifier + serving reference)
+2026-09-14 17:20:28 | INFO     | app | API started: regressor hist_gradient_boosting_v1 v3, classifier hist_gradient_boosting_v2 v4
+2026-09-14 17:20:28 | INFO     | on | Application startup complete.
+2026-09-14 17:20:28 | INFO     | server | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-09-14 17:20:30 | INFO     | h11_impl | 127.0.0.1:61347 - "GET / HTTP/1.1" 404
+2026-09-14 17:20:30 | INFO     | h11_impl | 127.0.0.1:62760 - "HEAD / HTTP/1.1" 404
+2026-09-14 17:20:30 | INFO     | h11_impl | 127.0.0.1:61347 - "GET / HTTP/1.1" 404
+2026-09-14 17:20:30 | INFO     | h11_impl | 127.0.0.1:61347 - "GET /favicon.ico HTTP/1.1" 404
+2026-09-14 17:20:30 | INFO     | h11_impl | 127.0.0.1:61347 - "GET /favicon.ico HTTP/1.1" 404
+2026-09-14 17:20:42 | INFO     | h11_impl | 127.0.0.1:52252 - "GET /health HTTP/1.1" 200
+2026-09-14 17:20:42 | INFO     | h11_impl | 127.0.0.1:52252 - "GET /model-info HTTP/1.1" 200
+2026-09-14 17:20:43 | INFO     | app | POST /predict/traffic-volume 2018-03-13 08:00:00 Clear -> 6007 (Severe)
+2026-09-14 17:20:43 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /predict/traffic-volume HTTP/1.1" 200
+2026-09-14 17:20:44 | INFO     | app | POST /predict/traffic-volume 2018-03-17 03:00:00 Snow -> 63 (Low)
+2026-09-14 17:20:44 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /predict/traffic-volume HTTP/1.1" 200
+2026-09-14 17:20:44 | INFO     | app | POST /predict/risk 2018-04-10 07:00:00 Mist -> p=0.996 high_risk=True
+2026-09-14 17:20:44 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /predict/risk HTTP/1.1" 200
+2026-09-14 17:20:44 | INFO     | app | POST /predict/risk 2018-04-10 07:00:00 Clear -> p=0.003 high_risk=False
+2026-09-14 17:20:44 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /predict/risk HTTP/1.1" 200
+2026-09-14 17:20:44 | INFO     | recommender | Recommendation requested: {'travel_date': '2018-01-16', 'earliest_hour': '7', 'latest_hour': '19', 'window_hours': '2', 'weather': 'Snow', 'temp_c': 'None', 'is_holiday': 'None'}
+2026-09-14 17:20:44 | INFO     | recommender | Recommended 18:00-20:00 (~3446 vehicles/hour, High)
+2026-09-14 17:20:44 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /recommend HTTP/1.1" 200
+2026-09-14 17:20:44 | WARNING  | app | Rejected invalid request to /predict/traffic-volume: body.date_time: Input should be a valid datetime or date, invalid character in year; body.temp_c: Input should be less than or equal to 45; body.weather_main: Input should be 'Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall' or 'Thunderstorm'
+2026-09-14 17:20:44 | INFO     | h11_impl | 127.0.0.1:52252 - "POST /predict/traffic-volume HTTP/1.1" 422
+2026-09-14 17:20:45 | INFO     | h11_impl | 127.0.0.1:53896 - "GET /docs HTTP/1.1" 200
+2026-09-14 17:20:46 | INFO     | h11_impl | 127.0.0.1:53896 - "GET /openapi.json HTTP/1.1" 200

@@ -1,0 +1,19 @@
+segment_type,segment,hours,positives,recall,false_positive_rate,precision
+hour_band,AM peak 06-09,1087,186,0.9892,0.0122,0.9436
+hour_band,Evening 19-23,1365,9,0.3333,0.0022,0.5000
+hour_band,Midday 10-14,1365,98,1.0000,0.0047,0.9423
+hour_band,Night 00-05,1624,0,,0.0000,
+hour_band,PM peak 15-18,1092,61,1.0000,0.0039,0.9385
+day_type,Holiday,167,6,1.0000,0.0621,0.3750
+day_type,Weekday,4504,299,0.9866,0.0002,0.9966
+day_type,Weekend,1862,49,0.9184,0.0072,0.7759
+weather_group,Clear,2328,0,,0.0000,
+weather_group,Cloudy,1996,0,,0.0000,
+weather_group,Low visibility,689,287,0.9756,0.0174,0.9756
+weather_group,Rain/Drizzle,926,0,,0.0000,
+weather_group,Snow,453,0,,0.0000,
+weather_group,Thunderstorm/Squall,141,67,0.9851,0.2297,0.7952
+season,Autumn,720,15,0.8667,0.0000,1.0000
+season,Spring,2196,127,1.0000,0.0014,0.9769
+season,Summer,2203,128,0.9688,0.0077,0.8857
+season,Winter,1414,84,0.9762,0.0038,0.9425

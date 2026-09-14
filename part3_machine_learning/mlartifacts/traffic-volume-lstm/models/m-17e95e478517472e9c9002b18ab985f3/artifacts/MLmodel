@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/User/OneDrive/Labs/CAPSTONE%20PROJECT/smart-city-traffic-capstone/part3_machine_learning/mlartifacts/traffic-volume-lstm/models/m-17e95e478517472e9c9002b18ab985f3/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.13.9
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.13.0+cpu
+mlflow_version: 3.15.1
+model_id: m-17e95e478517472e9c9002b18ab985f3
+model_size_bytes: 39117
+model_uuid: m-17e95e478517472e9c9002b18ab985f3
+prompts: null
+run_id: 4348cef573314a64bc3fca2e02ffcaed
+utc_time_created: '2026-09-14 09:17:56.635438'

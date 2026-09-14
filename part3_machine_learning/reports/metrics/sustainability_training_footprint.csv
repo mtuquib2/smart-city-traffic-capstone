@@ -1,0 +1,11 @@
+registered_model,version,candidate,train_seconds,energy_wh,co2_g,test_mae_or_f1
+traffic-risk-classifier,1,logistic_regression_v1,0.08598,0.00072,0.00029,0.90886
+traffic-risk-classifier,2,random_forest_v1,0.70551,0.00588,0.00241,0.95380
+traffic-risk-classifier,3,hist_gradient_boosting_v1,0.32437,0.00270,0.00111,0.95473
+traffic-risk-classifier,4,hist_gradient_boosting_v2,0.43153,0.00360,0.00147,0.95393
+traffic-volume-regressor,1,ridge_regression_v1,0.02433,0.00020,0.00008,550.07275
+traffic-volume-regressor,2,random_forest_v1,2.01370,0.01678,0.00688,218.27108
+traffic-volume-regressor,3,hist_gradient_boosting_v1,0.64740,0.00540,0.00221,217.31660
+traffic-volume-regressor,4,hist_gradient_boosting_v2,2.42062,0.02017,0.00827,221.49769
+traffic-volume-lstm,1,lstm_v1_small,18.24725,0.15206,0.06234,156.16350
+traffic-volume-lstm,2,lstm_v2_stacked,80.47946,0.67066,0.27497,158.23721

@@ -1,0 +1,19 @@
+segment_type,segment,hours,mae,relative_mae,bias,mae_vs_overall
+hour_band,AM peak 06-09,1087,256.3570,0.0568,27.7001,1.1796
+hour_band,Evening 19-23,1365,258.3527,0.1012,9.2314,1.1888
+hour_band,Midday 10-14,1365,230.0046,0.0498,45.7152,1.0584
+hour_band,Night 00-05,1624,84.9433,0.1009,-1.5046,0.3909
+hour_band,PM peak 15-18,1092,308.1628,0.0596,21.5093,1.4180
+day_type,Holiday,167,388.7657,0.1585,182.4304,1.7889
+day_type,Weekday,4504,192.1544,0.0530,15.8500,0.8842
+day_type,Weekend,1862,262.8045,0.0986,13.0518,1.2093
+weather_group,Clear,2328,188.2857,0.0630,0.0779,0.8664
+weather_group,Cloudy,1996,208.7177,0.0532,-18.9771,0.9604
+weather_group,Low visibility,689,161.8270,0.0552,2.9677,0.7447
+weather_group,Rain/Drizzle,926,167.9605,0.0489,3.7689,0.7729
+weather_group,Snow,453,588.3826,0.2113,333.9321,2.7075
+weather_group,Thunderstorm/Squall,141,221.5062,0.0678,49.9843,1.0193
+season,Autumn,720,181.1693,0.0551,22.5653,0.8337
+season,Spring,2196,234.9022,0.0695,45.8526,1.0809
+season,Summer,2203,172.2520,0.0511,-0.1930,0.7926
+season,Winter,1414,278.6217,0.0875,6.8193,1.2821

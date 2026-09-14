@@ -1,0 +1,105 @@
+{
+  "version": "1",
+  "candidate": "lstm_v1_small",
+  "algorithm": "PyTorch LSTM",
+  "params": {
+    "hidden_size": 32,
+    "num_layers": 1,
+    "dropout": 0.0,
+    "learning_rate": 0.002,
+    "lookback": 24
+  },
+  "validation": {
+    "mae": 168.52037048339844,
+    "rmse": 254.78793334960938,
+    "r2": 0.9834897518157959
+  },
+  "test": {
+    "mae": 156.1634979248047,
+    "rmse": 233.19876098632812,
+    "r2": 0.9860512018203735
+  },
+  "train_seconds": 18.24724709999282,
+  "n_parameters": 8513,
+  "epochs_trained": 15,
+  "mlflow_run_id": "4348cef573314a64bc3fca2e02ffcaed",
+  "trained_on": "2012-10-02 to 2016-12-31 (early stopping on 2017)",
+  "is_champion": true,
+  "sequence_features": [
+    "traffic_volume",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "is_holiday",
+    "temp_c",
+    "weather_severity",
+    "is_precipitation",
+    "clouds_all"
+  ],
+  "next_hour_features": [
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "is_weekend",
+    "is_holiday",
+    "is_rush_hour",
+    "temp_c",
+    "weather_severity",
+    "is_precipitation",
+    "is_low_visibility"
+  ],
+  "scaling": {
+    "sequence_mean": {
+      "traffic_volume": 3281.4665609634435,
+      "hour_sin": -0.003546584917595681,
+      "hour_cos": 0.0020559276842167648,
+      "dow_sin": 7.787889518508741e-05,
+      "dow_cos": -0.005497269628413999,
+      "is_holiday": 0.02992945200598589,
+      "temp_c": 7.395885056652176,
+      "weather_severity": 0.40272928098054583,
+      "is_precipitation": 0.19357941993871589,
+      "clouds_all": 46.00484572080097
+    },
+    "sequence_std": {
+      "traffic_volume": 1971.1538794581877,
+      "hour_sin": 0.7071407421647267,
+      "hour_cos": 0.7070861309898736,
+      "dow_sin": 0.7062814277410523,
+      "dow_cos": 0.7079349894461443,
+      "is_holiday": 0.17039575823410458,
+      "temp_c": 13.01831811539733,
+      "weather_severity": 0.7307589102887851,
+      "is_precipitation": 0.3951100991268318,
+      "clouds_all": 38.44242404972119
+    },
+    "next_hour_mean": {
+      "hour_sin": -0.003546584917595681,
+      "hour_cos": 0.0020559276842167648,
+      "dow_sin": 7.787889518508741e-05,
+      "dow_cos": -0.005497269628413999,
+      "is_weekend": 0.28408038195681606,
+      "is_holiday": 0.02992945200598589,
+      "is_rush_hour": 0.22853274424570655,
+      "temp_c": 7.395885056652176,
+      "weather_severity": 0.40272928098054583,
+      "is_precipitation": 0.19357941993871589,
+      "is_low_visibility": 0.09894534311978907
+    },
+    "next_hour_std": {
+      "hour_sin": 0.7071407421647267,
+      "hour_cos": 0.7070861309898736,
+      "dow_sin": 0.7062814277410523,
+      "dow_cos": 0.7079349894461443,
+      "is_weekend": 0.4509833314513732,
+      "is_holiday": 0.17039575823410458,
+      "is_rush_hour": 0.41989500008442143,
+      "temp_c": 13.01831811539733,
+      "weather_severity": 0.7307589102887851,
+      "is_precipitation": 0.3951100991268318,
+      "is_low_visibility": 0.298593936530934
+    }
+  }
+}

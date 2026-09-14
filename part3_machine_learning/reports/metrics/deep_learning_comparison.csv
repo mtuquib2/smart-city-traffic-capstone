@@ -1,0 +1,7 @@
+model,mae,rmse,r2
+Persistence (last hour),588.2917,813.4866,0.8303
+Seasonal naive (same hour yesterday),566.0734,1030.9550,0.7274
+Task 1 regressor (no lags),217.1135,363.2863,0.9661
+Hist GB + lag features (surrogate),139.0227,216.5768,0.9880
+LSTM v1 small,156.1635,233.1988,0.9861
+LSTM v2 stacked,158.2372,241.7067,0.9850

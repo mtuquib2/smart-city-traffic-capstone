@@ -1,0 +1,5 @@
+artifact,size_mb
+lag_surrogate_regressor.joblib,0.942
+lstm_traffic_volume.pt,0.038
+traffic_risk_classifier.joblib,0.058
+traffic_volume_regressor.joblib,0.296

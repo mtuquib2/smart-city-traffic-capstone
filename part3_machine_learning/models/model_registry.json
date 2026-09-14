@@ -1,0 +1,331 @@
+{
+  "traffic-risk-classifier": {
+    "updated_utc": "2026-09-14T09:16:51+00:00",
+    "versions": [
+      {
+        "version": "1",
+        "candidate": "logistic_regression_v1",
+        "algorithm": "LogisticRegression (baseline)",
+        "params": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "scaler": "StandardScaler"
+        },
+        "validation": {
+          "accuracy": 0.9888672099162171,
+          "precision": 0.8460291734197731,
+          "recall": 0.9961832061068703,
+          "f1": 0.9149868536371604,
+          "roc_auc": 0.9995066459475054,
+          "pr_auc": 0.991138780357183
+        },
+        "test": {
+          "accuracy": 0.989132098576458,
+          "precision": 0.8329411764705882,
+          "recall": 1.0,
+          "f1": 0.9088575096277278,
+          "roc_auc": 0.999179378302488,
+          "pr_auc": 0.9810944926024439
+        },
+        "test_at_tuned_threshold": {
+          "accuracy": 0.9958671360783713,
+          "precision": 0.9407008086253369,
+          "recall": 0.9858757062146892,
+          "f1": 0.9627586206896551,
+          "roc_auc": 0.999179378302488,
+          "pr_auc": 0.9810944926024439
+        },
+        "decision_threshold": 0.9103071113213734,
+        "train_seconds": 0.08597850002115592,
+        "mlflow_run_id": "0105fa36761848a0bcd1686b06e0faa8",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      },
+      {
+        "version": "2",
+        "candidate": "random_forest_v1",
+        "algorithm": "RandomForestClassifier",
+        "params": {
+          "n_estimators": 200,
+          "max_leaf_nodes": 512,
+          "min_samples_leaf": 5,
+          "class_weight": "balanced_subsample"
+        },
+        "validation": {
+          "accuracy": 0.9959830138872948,
+          "precision": 0.9553072625698324,
+          "recall": 0.9790076335877863,
+          "f1": 0.9670122525918945,
+          "roc_auc": 0.9996835263092643,
+          "pr_auc": 0.9953494075985897
+        },
+        "test": {
+          "accuracy": 0.9947956528394306,
+          "precision": 0.918848167539267,
+          "recall": 0.9915254237288136,
+          "f1": 0.9538043478260869,
+          "roc_auc": 0.9996100332546085,
+          "pr_auc": 0.9929833736086286
+        },
+        "test_at_tuned_threshold": {
+          "accuracy": 0.9947956528394306,
+          "precision": 0.9395604395604396,
+          "recall": 0.9661016949152542,
+          "f1": 0.9526462395543176,
+          "roc_auc": 0.9996100332546085,
+          "pr_auc": 0.9929833736086286
+        },
+        "decision_threshold": 0.5833705147909086,
+        "train_seconds": 0.7055111000081524,
+        "mlflow_run_id": "d17006351a504494ab31c454d51fa9cf",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      },
+      {
+        "version": "3",
+        "candidate": "hist_gradient_boosting_v1",
+        "algorithm": "HistGradientBoostingClassifier",
+        "params": {
+          "learning_rate": 0.1,
+          "max_iter": 200,
+          "max_leaf_nodes": 31,
+          "class_weight": "balanced"
+        },
+        "validation": {
+          "accuracy": 0.9951796166647539,
+          "precision": 0.951310861423221,
+          "recall": 0.9694656488549618,
+          "f1": 0.9603024574669187,
+          "roc_auc": 0.9997232603035724,
+          "pr_auc": 0.9958374955411895
+        },
+        "test": {
+          "accuracy": 0.994948721873565,
+          "precision": 0.928,
+          "recall": 0.9830508474576272,
+          "f1": 0.9547325102880658,
+          "roc_auc": 0.9995995183247798,
+          "pr_auc": 0.9927420530157475
+        },
+        "test_at_tuned_threshold": {
+          "accuracy": 0.9961732741466401,
+          "precision": 0.9660056657223796,
+          "recall": 0.963276836158192,
+          "f1": 0.9646393210749646,
+          "roc_auc": 0.9995995183247798,
+          "pr_auc": 0.9927420530157475
+        },
+        "decision_threshold": 0.8185529297058772,
+        "train_seconds": 0.3243699999875389,
+        "mlflow_run_id": "54ec6e54878c4b9789821ce59092382e",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      },
+      {
+        "version": "4",
+        "candidate": "hist_gradient_boosting_v2",
+        "algorithm": "HistGradientBoostingClassifier (tuned)",
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 500,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0,
+          "class_weight": "balanced"
+        },
+        "validation": {
+          "accuracy": 0.9955239297601285,
+          "precision": 0.944954128440367,
+          "recall": 0.982824427480916,
+          "f1": 0.9635173058933583,
+          "roc_auc": 0.9997758117153993,
+          "pr_auc": 0.9967262355162609
+        },
+        "test": {
+          "accuracy": 0.9947956528394306,
+          "precision": 0.9166666666666666,
+          "recall": 0.9943502824858758,
+          "f1": 0.9539295392953929,
+          "roc_auc": 0.9996738085898745,
+          "pr_auc": 0.9941664865695374
+        },
+        "test_at_tuned_threshold": {
+          "accuracy": 0.9951017909076993,
+          "precision": 0.9351351351351351,
+          "recall": 0.9774011299435028,
+          "f1": 0.9558011049723757,
+          "roc_auc": 0.9996738085898745,
+          "pr_auc": 0.9941664865695374
+        },
+        "decision_threshold": 0.8337122614317983,
+        "train_seconds": 0.43152549999649636,
+        "mlflow_run_id": "3d609e9b733440559a7d42c243ef85de",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": true
+      }
+    ]
+  },
+  "traffic-volume-regressor": {
+    "updated_utc": "2026-09-14T09:17:27+00:00",
+    "versions": [
+      {
+        "version": "1",
+        "candidate": "ridge_regression_v1",
+        "algorithm": "Ridge (baseline)",
+        "params": {
+          "alpha": 1.0,
+          "scaler": "StandardScaler"
+        },
+        "validation": {
+          "mae": 569.9858266694807,
+          "rmse": 726.6896769122271,
+          "r2": 0.8656354966469507
+        },
+        "test": {
+          "mae": 550.0727452809936,
+          "rmse": 709.0083551775518,
+          "r2": 0.8710525630292175
+        },
+        "train_seconds": 0.02433109999401495,
+        "mlflow_run_id": "81b5b7c86f2d46869053dd4e1e874ab7",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      },
+      {
+        "version": "2",
+        "candidate": "random_forest_v1",
+        "algorithm": "RandomForestRegressor",
+        "params": {
+          "n_estimators": 200,
+          "max_leaf_nodes": 512,
+          "min_samples_leaf": 5
+        },
+        "validation": {
+          "mae": 231.75915672283082,
+          "rmse": 360.1680834389968,
+          "r2": 0.9669936865799279
+        },
+        "test": {
+          "mae": 218.27107816305633,
+          "rmse": 369.45464474234365,
+          "r2": 0.9649867624901001
+        },
+        "train_seconds": 2.013704200013308,
+        "mlflow_run_id": "62abef6f30bb458eada35cd8667f8e2d",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      },
+      {
+        "version": "3",
+        "candidate": "hist_gradient_boosting_v1",
+        "algorithm": "HistGradientBoostingRegressor",
+        "params": {
+          "learning_rate": 0.1,
+          "max_iter": 200,
+          "max_leaf_nodes": 31
+        },
+        "validation": {
+          "mae": 231.5429264719118,
+          "rmse": 365.57435569281546,
+          "r2": 0.965995372946494
+        },
+        "test": {
+          "mae": 217.31660463770268,
+          "rmse": 363.8751155330456,
+          "r2": 0.9660363215302563
+        },
+        "train_seconds": 0.6474040999892168,
+        "mlflow_run_id": "9e25d9cd785f4dd9b8a6d46b27e5c1e8",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": true
+      },
+      {
+        "version": "4",
+        "candidate": "hist_gradient_boosting_v2",
+        "algorithm": "HistGradientBoostingRegressor (tuned)",
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 600,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 30,
+          "l2_regularization": 1.0
+        },
+        "validation": {
+          "mae": 240.1157639670428,
+          "rmse": 375.0022622346114,
+          "r2": 0.964218845856499
+        },
+        "test": {
+          "mae": 221.49769051600708,
+          "rmse": 366.7662426564358,
+          "r2": 0.9654944685727047
+        },
+        "train_seconds": 2.420618700009072,
+        "mlflow_run_id": "a7b9ade69a09438a880b31d2a4900c0c",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "is_champion": false
+      }
+    ]
+  },
+  "traffic-volume-lstm": {
+    "updated_utc": "2026-09-14T09:19:25+00:00",
+    "versions": [
+      {
+        "version": "1",
+        "candidate": "lstm_v1_small",
+        "algorithm": "PyTorch LSTM",
+        "params": {
+          "hidden_size": 32,
+          "num_layers": 1,
+          "dropout": 0.0,
+          "learning_rate": 0.002,
+          "lookback": 24
+        },
+        "validation": {
+          "mae": 168.52037048339844,
+          "rmse": 254.78793334960938,
+          "r2": 0.9834897518157959
+        },
+        "test": {
+          "mae": 156.1634979248047,
+          "rmse": 233.19876098632812,
+          "r2": 0.9860512018203735
+        },
+        "train_seconds": 18.24724709999282,
+        "n_parameters": 8513,
+        "epochs_trained": 15,
+        "mlflow_run_id": "4348cef573314a64bc3fca2e02ffcaed",
+        "trained_on": "2012-10-02 to 2016-12-31 (early stopping on 2017)",
+        "is_champion": true
+      },
+      {
+        "version": "2",
+        "candidate": "lstm_v2_stacked",
+        "algorithm": "PyTorch LSTM",
+        "params": {
+          "hidden_size": 64,
+          "num_layers": 2,
+          "dropout": 0.2,
+          "learning_rate": 0.001,
+          "lookback": 24
+        },
+        "validation": {
+          "mae": 169.2821044921875,
+          "rmse": 260.4267578125,
+          "r2": 0.9827508926391602
+        },
+        "test": {
+          "mae": 158.23721313476562,
+          "rmse": 241.7067108154297,
+          "r2": 0.9850148558616638
+        },
+        "train_seconds": 80.47945959999925,
+        "n_parameters": 57665,
+        "epochs_trained": 26,
+        "mlflow_run_id": "d87ea786bdae43b5ace5d6bf6e19024a",
+        "trained_on": "2012-10-02 to 2016-12-31 (early stopping on 2017)",
+        "is_champion": false
+      }
+    ]
+  }
+}

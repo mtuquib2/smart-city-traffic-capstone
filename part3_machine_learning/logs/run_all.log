@@ -1,0 +1,13 @@
+2026-09-14 17:16:14 | INFO     | run_all | Part 3 pipeline started: stages=data -> supervised -> unsupervised -> deep -> explain -> recommend -> api -> monitoring -> fairness -> exports, log=run_all.log
+2026-09-14 17:16:15 | WARNING  | run_all | Deleted existing MLflow store, artifacts and local model registry (--fresh-mlflow)
+2026-09-14 17:16:15 | INFO     | run_all | ===== Stage 'data' started =====
+2026-09-14 17:16:15 | INFO     | data_prep | Loaded Part 2 cleaned data: 40575 rows, 11 columns
+2026-09-14 17:16:15 | INFO     | data_prep | Added temp_c and whole-day is_holiday flag (53 holiday dates)
+2026-09-14 17:16:15 | INFO     | data_prep | Built 32 model features; table shape 40575 rows x 42 columns
+2026-09-14 17:16:15 | INFO     | data_prep | Added congestion_category from quartiles (q1=1255, q2=3430, q3=4952): {'Low': 10146, 'Medium': 10144, 'High': 10143, 'Severe': 10142}
+2026-09-14 17:16:15 | INFO     | data_prep | Added PROXY high_risk label: 1927 positive hours (4.75%)
+2026-09-14 17:16:15 | WARNING  | data_prep | high_risk label is imbalanced (4.75% positive): using class weighting and PR-AUC
+2026-09-14 17:16:15 | INFO     | data_prep | Time-based split sizes: {'train': 25329, 'validation': 8713, 'test': 6533}
+2026-09-14 17:16:15 | INFO     | data_prep | Saved modelling table to data/modelling_table.csv
+2026-09-14 17:16:15 | INFO     | run_all | ===== Stage 'data' finished in 0.4 s =====
+2026-09-14 17:16:15 | INFO     | run_all | ===== Stage 'supervised' started =====

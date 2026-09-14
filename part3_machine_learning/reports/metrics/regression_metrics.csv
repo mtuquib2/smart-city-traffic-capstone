@@ -1,0 +1,5 @@
+candidate,algorithm,val_mae,val_rmse,val_r2,test_mae,test_rmse,test_r2
+ridge_regression_v1,Ridge (baseline),569.9858,726.6897,0.8656,550.0727,709.0084,0.8711
+random_forest_v1,RandomForestRegressor,231.7592,360.1681,0.9670,218.2711,369.4546,0.9650
+hist_gradient_boosting_v1,HistGradientBoostingRegressor,231.5429,365.5744,0.9660,217.3166,363.8751,0.9660
+hist_gradient_boosting_v2,HistGradientBoostingRegressor (tuned),240.1158,375.0023,0.9642,221.4977,366.7662,0.9655

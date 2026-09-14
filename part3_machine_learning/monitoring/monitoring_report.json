@@ -1,0 +1,352 @@
+{
+  "generated_utc": "2026-09-14T09:19:33+00:00",
+  "model": {
+    "name": "traffic-volume-regressor",
+    "candidate": "hist_gradient_boosting_v1",
+    "version": "3"
+  },
+  "latest_batch": "2018-09",
+  "alerts_in_period": [
+    "2018-01",
+    "2018-04"
+  ],
+  "simulated_incidents_detected": 2,
+  "rules": {
+    "alert_mae_ratio": 1.3,
+    "alert_bias_share": 0.1,
+    "alert_out_of_range_share": 0.01,
+    "drift_warning_psi": 0.25,
+    "baseline_validation_mae": 231.5429264719118,
+    "training_ranges": {
+      "temp_c": [
+        -29.76,
+        35.09
+      ],
+      "clouds_all": [
+        0.0,
+        100.0
+      ],
+      "rain_1h": [
+        0.0,
+        55.63
+      ],
+      "snow_1h": [
+        0.0,
+        0.51
+      ]
+    },
+    "drift_reference": "same calendar month of 2017"
+  },
+  "system_status": "PASS",
+  "batches": [
+    {
+      "batch": "2018-01",
+      "kind": "real",
+      "rows": 742,
+      "reference_month": 1,
+      "status": "ALERT",
+      "mae": 307.05125815914977,
+      "mae_ratio": 1.3261094296326854,
+      "bias": 24.287431558456937,
+      "psi": {
+        "temp_c": 0.14250385471581853,
+        "traffic_volume": 0.023457988999891495,
+        "predicted_volume": 0.009851956988955154,
+        "weather_main": 0.2555706060234863,
+        "clouds_all": 0.33226922603220493
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [
+        "Error drift: MAE 307 is 1.33x the validation MAE (232)"
+      ],
+      "drift_warnings": [
+        "weather_main PSI=0.26",
+        "clouds_all PSI=0.33"
+      ]
+    },
+    {
+      "batch": "2018-02",
+      "kind": "real",
+      "rows": 672,
+      "reference_month": 2,
+      "status": "PASS",
+      "mae": 247.23077913471644,
+      "mae_ratio": 1.0677535388441577,
+      "bias": -12.468461326299467,
+      "psi": {
+        "temp_c": 1.5373746038702885,
+        "traffic_volume": 0.03394023388783946,
+        "predicted_volume": 0.025353713247400878,
+        "weather_main": 0.41071264927033624,
+        "clouds_all": 1.563007747314348
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": [
+        "temp_c PSI=1.54",
+        "weather_main PSI=0.41",
+        "clouds_all PSI=1.56"
+      ]
+    },
+    {
+      "batch": "2018-03",
+      "kind": "real",
+      "rows": 733,
+      "reference_month": 3,
+      "status": "PASS",
+      "mae": 217.76329553250255,
+      "mae_ratio": 0.9404877914027711,
+      "bias": 14.295829163336315,
+      "psi": {
+        "temp_c": 0.6175282009027125,
+        "traffic_volume": 0.02402661386886311,
+        "predicted_volume": 0.001124938487600841,
+        "weather_main": 0.17259947499259912,
+        "clouds_all": 0.10482272607142472
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": [
+        "temp_c PSI=0.62"
+      ]
+    },
+    {
+      "batch": "2018-04",
+      "kind": "real",
+      "rows": 720,
+      "reference_month": 4,
+      "status": "ALERT",
+      "mae": 302.8708948174595,
+      "mae_ratio": 1.3080550523930619,
+      "bias": 96.34903377484693,
+      "psi": {
+        "temp_c": 1.2201207860208356,
+        "traffic_volume": 0.03879716834475129,
+        "predicted_volume": 0.012774571200472928,
+        "weather_main": 0.7397747029482811,
+        "clouds_all": 0.25436251631839485
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [
+        "Error drift: MAE 303 is 1.31x the validation MAE (232)"
+      ],
+      "drift_warnings": [
+        "temp_c PSI=1.22",
+        "weather_main PSI=0.74",
+        "clouds_all PSI=0.25"
+      ]
+    },
+    {
+      "batch": "2018-05",
+      "kind": "real",
+      "rows": 743,
+      "reference_month": 5,
+      "status": "PASS",
+      "mae": 185.94563045680368,
+      "mae_ratio": 0.8030719542596804,
+      "bias": 28.051446540931483,
+      "psi": {
+        "temp_c": 0.6757988224442635,
+        "traffic_volume": 0.017997592052553694,
+        "predicted_volume": 0.0012643206181768482,
+        "weather_main": 0.1088529825834477,
+        "clouds_all": 0.27659169888883206
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0026917900403768506,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": [
+        "temp_c PSI=0.68",
+        "clouds_all PSI=0.28"
+      ]
+    },
+    {
+      "batch": "2018-06",
+      "kind": "real",
+      "rows": 719,
+      "reference_month": 6,
+      "status": "PASS",
+      "mae": 167.23886321658176,
+      "mae_ratio": 0.7222801653449314,
+      "bias": 6.344080837463321,
+      "psi": {
+        "temp_c": 0.19539252802482546,
+        "traffic_volume": 0.00851862993053317,
+        "predicted_volume": 0.0030845173381282252,
+        "weather_main": 0.1865742706161042,
+        "clouds_all": 0.14422673816173381
+      },
+      "out_of_range_share": {
+        "temp_c": 0.005563282336578581,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": []
+    },
+    {
+      "batch": "2018-07",
+      "kind": "real",
+      "rows": 744,
+      "reference_month": 7,
+      "status": "PASS",
+      "mae": 181.57522055387483,
+      "mae_ratio": 0.7841967937461545,
+      "bias": -3.445550783625877,
+      "psi": {
+        "temp_c": 0.0371664621591928,
+        "traffic_volume": 0.015927806325665192,
+        "predicted_volume": 0.0036121800619474684,
+        "weather_main": 0.038286399637298144,
+        "clouds_all": 0.040700134551911175
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": []
+    },
+    {
+      "batch": "2018-08",
+      "kind": "real",
+      "rows": 740,
+      "reference_month": 8,
+      "status": "PASS",
+      "mae": 167.74934444777196,
+      "mae_ratio": 0.7244848590445774,
+      "bias": -3.2743303901289758,
+      "psi": {
+        "temp_c": 0.40365531481235023,
+        "traffic_volume": 0.0305539455009622,
+        "predicted_volume": 0.007458602867739835,
+        "weather_main": 0.11823408750345564,
+        "clouds_all": 0.0879523427118728
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": [
+        "temp_c PSI=0.40"
+      ]
+    },
+    {
+      "batch": "2018-09",
+      "kind": "real",
+      "rows": 720,
+      "reference_month": 9,
+      "status": "PASS",
+      "mae": 181.1693000083837,
+      "mae_ratio": 0.7824436823396594,
+      "bias": 22.565265850258474,
+      "psi": {
+        "temp_c": 0.09102937595118847,
+        "traffic_volume": 0.0528668865465369,
+        "predicted_volume": 0.011246564429575936,
+        "weather_main": 0.4104574698073827,
+        "clouds_all": 0.11367229297629489
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [],
+      "drift_warnings": [
+        "weather_main PSI=0.41"
+      ]
+    },
+    {
+      "batch": "SIM: sensor under-count (Sep 2018)",
+      "kind": "simulated",
+      "rows": 720,
+      "reference_month": 9,
+      "status": "ALERT",
+      "mae": 1179.4272516639667,
+      "mae_ratio": 5.093773623903132,
+      "bias": 1173.8166547391472,
+      "psi": {
+        "temp_c": 0.09102937595118847,
+        "traffic_volume": 3.0832394532595995,
+        "predicted_volume": 0.011246564429575936,
+        "weather_main": 0.4104574698073827,
+        "clouds_all": 0.11367229297629489
+      },
+      "out_of_range_share": {
+        "temp_c": 0.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [
+        "Error drift: MAE 1,179 is 5.09x the validation MAE (232)",
+        "Error drift: mean error +1,174 is 55% of mean volume"
+      ],
+      "drift_warnings": [
+        "traffic_volume PSI=3.08",
+        "weather_main PSI=0.41"
+      ]
+    },
+    {
+      "batch": "SIM: temperature feed in \u00b0F (Jul 2018)",
+      "kind": "simulated",
+      "rows": 744,
+      "reference_month": 7,
+      "status": "ALERT",
+      "mae": 194.7633704633669,
+      "mae_ratio": 0.8411544823719476,
+      "bias": -21.486211764522583,
+      "psi": {
+        "temp_c": 8.277920309983294,
+        "traffic_volume": 0.015927806325665192,
+        "predicted_volume": 0.03188777428876655,
+        "weather_main": 0.038286399637298144,
+        "clouds_all": 0.040700134551911175
+      },
+      "out_of_range_share": {
+        "temp_c": 1.0,
+        "clouds_all": 0.0,
+        "rain_1h": 0.0,
+        "snow_1h": 0.0
+      },
+      "alerts": [
+        "Data integrity: 100% of temp_c outside training range -29.76 to 35.09"
+      ],
+      "drift_warnings": [
+        "temp_c PSI=8.28"
+      ]
+    }
+  ]
+}

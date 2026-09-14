@@ -1,0 +1,267 @@
+[
+  {
+    "request": {
+      "method": "GET",
+      "path": "/health",
+      "body": null
+    },
+    "status_code": 200,
+    "response": {
+      "status": "ok",
+      "uptime_seconds": 14.1,
+      "models": {
+        "traffic-volume-regressor": "3",
+        "traffic-risk-classifier": "4"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "GET",
+      "path": "/model-info",
+      "body": null
+    },
+    "status_code": 200,
+    "response": {
+      "traffic-volume-regressor": {
+        "version": "3",
+        "candidate": "hist_gradient_boosting_v1",
+        "algorithm": "HistGradientBoostingRegressor",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "validation": {
+          "mae": 231.5429264719118,
+          "rmse": 365.57435569281546,
+          "r2": 0.965995372946494
+        },
+        "test": {
+          "mae": 217.31660463770268,
+          "rmse": 363.8751155330456,
+          "r2": 0.9660363215302563
+        },
+        "mlflow_run_id": "9e25d9cd785f4dd9b8a6d46b27e5c1e8"
+      },
+      "traffic-risk-classifier": {
+        "version": "4",
+        "candidate": "hist_gradient_boosting_v2",
+        "algorithm": "HistGradientBoostingClassifier (tuned)",
+        "trained_on": "2012-10-02 to 2017-12-31",
+        "validation": {
+          "accuracy": 0.9955239297601285,
+          "precision": 0.944954128440367,
+          "recall": 0.982824427480916,
+          "f1": 0.9635173058933583,
+          "roc_auc": 0.9997758117153993,
+          "pr_auc": 0.9967262355162609
+        },
+        "test": {
+          "accuracy": 0.9947956528394306,
+          "precision": 0.9166666666666666,
+          "recall": 0.9943502824858758,
+          "f1": 0.9539295392953929,
+          "roc_auc": 0.9996738085898745,
+          "pr_auc": 0.9941664865695374
+        },
+        "mlflow_run_id": "3d609e9b733440559a7d42c243ef85de",
+        "decision_threshold": 0.8337122614317983,
+        "label": "high_risk is a documented PROXY (High/Severe congestion during severe or low-visibility weather). It is not trained on accident data and must not be used as an accident prediction."
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/predict/traffic-volume",
+      "body": {
+        "date_time": "2018-03-13T08:00:00",
+        "temp_c": -2.0,
+        "weather_main": "Clear",
+        "clouds_all": 5
+      }
+    },
+    "status_code": 200,
+    "response": {
+      "prediction_id": "abfbe53f-f0c6-46d7-9843-1f56368c340e",
+      "predicted_volume": 6007,
+      "congestion_category": "Severe",
+      "model": "hist_gradient_boosting_v1",
+      "model_version": "3"
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/predict/traffic-volume",
+      "body": {
+        "date_time": "2018-03-17T03:00:00",
+        "temp_c": -5.0,
+        "weather_main": "Snow",
+        "snow_1h": 0.2,
+        "clouds_all": 90
+      }
+    },
+    "status_code": 200,
+    "response": {
+      "prediction_id": "25ddc97b-f396-48e8-8f8f-b5456557b4e5",
+      "predicted_volume": 63,
+      "congestion_category": "Low",
+      "model": "hist_gradient_boosting_v1",
+      "model_version": "3"
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/predict/risk",
+      "body": {
+        "date_time": "2018-04-10T07:00:00",
+        "temp_c": 4.0,
+        "weather_main": "Mist",
+        "clouds_all": 90
+      }
+    },
+    "status_code": 200,
+    "response": {
+      "prediction_id": "2c83c723-fab4-4581-bc23-ed628e6155ed",
+      "probability": 0.9963,
+      "high_risk": true,
+      "decision_threshold": 0.8337,
+      "model": "hist_gradient_boosting_v2",
+      "model_version": "4",
+      "disclaimer": "high_risk is a documented PROXY (High/Severe congestion during severe or low-visibility weather). It is not trained on accident data and must not be used as an accident prediction."
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/predict/risk",
+      "body": {
+        "date_time": "2018-04-10T07:00:00",
+        "temp_c": 4.0,
+        "weather_main": "Clear",
+        "clouds_all": 1
+      }
+    },
+    "status_code": 200,
+    "response": {
+      "prediction_id": "e4651f17-5004-4727-8d41-33192dbd5384",
+      "probability": 0.0031,
+      "high_risk": false,
+      "decision_threshold": 0.8337,
+      "model": "hist_gradient_boosting_v2",
+      "model_version": "4",
+      "disclaimer": "high_risk is a documented PROXY (High/Severe congestion during severe or low-visibility weather). It is not trained on accident data and must not be used as an accident prediction."
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/recommend",
+      "body": {
+        "travel_date": "2018-01-16",
+        "earliest_hour": 7,
+        "latest_hour": 19,
+        "window_hours": 2,
+        "weather": "Snow"
+      }
+    },
+    "status_code": 200,
+    "response": {
+      "day_type": "weekday",
+      "message": "For a weekday journey on Tuesday 16 January 2018 in snow, consider travelling between 18:00 and 20:00, when traffic is forecast at about 3,446 vehicles per hour (High congestion). That is roughly 35% lighter than the busiest option in your range, 16:00-18:00 (~5,304). Historically this weekday slot averages about 3,964 vehicles per hour. Good alternatives: 10:00-12:00 (~3,755), 11:00-13:00 (~3,932). Snow lowers daytime volumes by about 8% historically but makes each journey slower and riskier; allow extra time.",
+      "best_window": {
+        "start": "18:00",
+        "end": "20:00",
+        "mean_predicted_volume": 3446,
+        "congestion": "High",
+        "elevated_risk": false,
+        "historical_median": 3964
+      },
+      "alternatives": [
+        {
+          "start": "10:00",
+          "end": "12:00",
+          "mean_predicted_volume": 3755,
+          "congestion": "High",
+          "elevated_risk": false,
+          "historical_median": 4610
+        },
+        {
+          "start": "11:00",
+          "end": "13:00",
+          "mean_predicted_volume": 3932,
+          "congestion": "High",
+          "elevated_risk": false,
+          "historical_median": 4835
+        },
+        {
+          "start": "09:00",
+          "end": "11:00",
+          "mean_predicted_volume": 3969,
+          "congestion": "High",
+          "elevated_risk": false,
+          "historical_median": 4780
+        }
+      ],
+      "busiest_window": {
+        "start": "16:00",
+        "end": "18:00",
+        "mean_predicted_volume": 5304,
+        "congestion": "Severe",
+        "elevated_risk": false,
+        "historical_median": 6206
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "/predict/traffic-volume",
+      "body": {
+        "date_time": "not-a-date",
+        "temp_c": 999,
+        "weather_main": "Tornado"
+      }
+    },
+    "status_code": 422,
+    "response": {
+      "detail": [
+        {
+          "type": "datetime_from_date_parsing",
+          "loc": [
+            "body",
+            "date_time"
+          ],
+          "msg": "Input should be a valid datetime or date, invalid character in year",
+          "input": "not-a-date",
+          "ctx": {
+            "error": "invalid character in year"
+          }
+        },
+        {
+          "type": "less_than_equal",
+          "loc": [
+            "body",
+            "temp_c"
+          ],
+          "msg": "Input should be less than or equal to 45",
+          "input": 999,
+          "ctx": {
+            "le": 45.0
+          }
+        },
+        {
+          "type": "literal_error",
+          "loc": [
+            "body",
+            "weather_main"
+          ],
+          "msg": "Input should be 'Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall' or 'Thunderstorm'",
+          "input": "Tornado",
+          "ctx": {
+            "expected": "'Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall' or 'Thunderstorm'"
+          }
+        }
+      ]
+    }
+  }
+]

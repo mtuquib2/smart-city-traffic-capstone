@@ -1,0 +1,9 @@
+2026-09-14 17:20:42 | INFO     | demo_client | GET /health -> HTTP 200
+2026-09-14 17:20:42 | INFO     | demo_client | GET /model-info -> HTTP 200
+2026-09-14 17:20:43 | INFO     | demo_client | POST /predict/traffic-volume -> HTTP 200
+2026-09-14 17:20:44 | INFO     | demo_client | POST /predict/traffic-volume -> HTTP 200
+2026-09-14 17:20:44 | INFO     | demo_client | POST /predict/risk -> HTTP 200
+2026-09-14 17:20:44 | INFO     | demo_client | POST /predict/risk -> HTTP 200
+2026-09-14 17:20:44 | INFO     | demo_client | POST /recommend -> HTTP 200
+2026-09-14 17:20:44 | INFO     | demo_client | POST /predict/traffic-volume -> HTTP 422
+2026-09-14 17:20:44 | INFO     | demo_client | Saved 8 API request/response pairs to reports/api_demo_responses.json

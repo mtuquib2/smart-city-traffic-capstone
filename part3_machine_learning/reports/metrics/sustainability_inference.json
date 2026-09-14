@@ -1,0 +1,11 @@
+{
+  "microseconds_per_prediction": {
+    "traffic_volume_regressor": 4.068500001449138,
+    "traffic_risk_classifier": 1.6831799992360175
+  },
+  "lstm_parameters": 8513,
+  "assumptions": {
+    "cpu_power_watts": 30.0,
+    "grid_kg_co2_per_kwh": 0.41
+  }
+}
