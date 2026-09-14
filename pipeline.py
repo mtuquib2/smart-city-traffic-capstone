@@ -37,6 +37,7 @@ import numpy as np
 import pandas as pd
 
 from feature_engineering import build_features
+from visualizations import create_all_figures
 
 # ---------------------------------------------------------------------------
 # Logger (module-level; handlers are attached in configure_logging())
@@ -549,18 +550,28 @@ def save_dataframe(df: pd.DataFrame, path: Path, description: str) -> None:
 # ---------------------------------------------------------------------------
 # Orchestration
 # ---------------------------------------------------------------------------
-def run_pipeline(input_path: Path, clean_output: Path, features_output: Path) -> pd.DataFrame:
-    """Run load -> validate -> clean -> feature engineering and persist each output."""
-    logger.info("Stage 1/4: load raw data")
+def run_pipeline(
+    input_path: Path,
+    clean_output: Path,
+    features_output: Path,
+    figures_dir: Path | None = DEFAULT_FIGURES_DIR,
+) -> pd.DataFrame:
+    """Run load -> validate -> clean -> features -> figures and persist each output."""
+    logger.info("Stage 1/5: load raw data")
     raw = load_raw_data(input_path)
-    logger.info("Stage 2/4: validate schema")
+    logger.info("Stage 2/5: validate schema")
     validated = validate_schema(raw)
-    logger.info("Stage 3/4: clean data")
+    logger.info("Stage 3/5: clean data")
     cleaned = clean_data(validated)
     save_dataframe(cleaned, clean_output, "cleaned dataset")
-    logger.info("Stage 4/4: feature engineering")
+    logger.info("Stage 4/5: feature engineering")
     features = build_features(cleaned)
     save_dataframe(features, features_output, "feature dataset")
+    if figures_dir is None:
+        logger.info("Stage 5/5: visualisation skipped (--skip-figures)")
+    else:
+        logger.info("Stage 5/5: visualisation")
+        create_all_figures(features, figures_dir)
     return features
 
 
@@ -571,6 +582,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--features-output", type=Path, default=DEFAULT_FEATURES_OUTPUT, help="Where to write the feature CSV"
     )
+    parser.add_argument("--figures-dir", type=Path, default=DEFAULT_FIGURES_DIR, help="Directory for saved figures")
+    parser.add_argument("--skip-figures", action="store_true", help="Run cleaning and features only")
     parser.add_argument("--log-file", type=Path, default=DEFAULT_LOG_FILE, help="Log file path (default logs/pipeline.log)")
     parser.add_argument(
         "--log-level",
@@ -587,7 +600,8 @@ def main(argv: list[str] | None = None) -> int:
     logger.info("Pipeline started (log level=%s, log file=%s)", args.log_level, display_path(args.log_file))
 
     try:
-        run_pipeline(args.input, args.clean_output, args.features_output)
+        figures_dir = None if args.skip_figures else args.figures_dir
+        run_pipeline(args.input, args.clean_output, args.features_output, figures_dir)
     except PipelineError as exc:
         logger.error("Pipeline aborted: %s", exc, exc_info=True)
         return 1
