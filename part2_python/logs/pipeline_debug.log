@@ -1,0 +1,120 @@
+2026-09-14 14:04:42 | INFO     | pipeline | Pipeline started (log level=DEBUG, log file=logs/pipeline_debug.log)
+2026-09-14 14:04:42 | INFO     | pipeline | Stage 1/5: load raw data
+2026-09-14 14:04:42 | INFO     | pipeline | Loading raw data from data/raw/Metro_Interstate_Traffic_Volume.csv
+2026-09-14 14:04:42 | INFO     | pipeline | Raw data loaded successfully: 48204 rows, 9 columns
+2026-09-14 14:04:42 | INFO     | pipeline | Stage 2/5: validate schema
+2026-09-14 14:04:42 | INFO     | pipeline | Validating schema against 9 expected columns
+2026-09-14 14:04:42 | INFO     | pipeline | Schema validation passed: all 9 expected columns present
+2026-09-14 14:04:42 | DEBUG    | pipeline | Column dtypes after schema validation: {'holiday': 'str', 'temp': 'float64', 'rain_1h': 'float64', 'snow_1h': 'float64', 'clouds_all': 'int64', 'weather_main': 'str', 'weather_description': 'str', 'date_time': 'str', 'traffic_volume': 'int64'}
+2026-09-14 14:04:42 | INFO     | pipeline | Stage 3/5: clean data
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 1/6: standardising categorical values
+2026-09-14 14:04:42 | INFO     | pipeline | Standardised 'holiday': no inconsistent labels found
+2026-09-14 14:04:42 | INFO     | pipeline | Standardised 'weather_main': no inconsistent labels found
+2026-09-14 14:04:42 | WARNING  | pipeline | Standardised 'weather_description': 1730 row(s) modified (inconsistent casing, e.g. 'Sky is Clear', 'SQUALLS')
+2026-09-14 14:04:42 | DEBUG    | pipeline | weather_main categories: ['Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall', 'Thunderstorm']
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 2/6: parsing and validating date_time
+2026-09-14 14:04:42 | INFO     | pipeline | Parsed date_time: 48204 valid timestamps from 2012-10-02 09:00:00 to 2018-09-30 23:00:00
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 3/6: removing duplicates
+2026-09-14 14:04:42 | WARNING  | pipeline | Dropped 17 row(s) in duplicate removal: exact duplicate records
+2026-09-14 14:04:42 | WARNING  | pipeline | Dropped 7612 row(s) in duplicate removal: repeated hourly timestamps (multiple weather conditions reported for the same hour; primary condition kept)
+2026-09-14 14:04:42 | INFO     | pipeline | Duplicate removal complete: 40575 unique hourly records remain
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 4/6: handling physically impossible values
+2026-09-14 14:04:42 | DEBUG    | pipeline | temp readings outside [220 K, 325 K]: 10
+2026-09-14 14:04:42 | DEBUG    | pipeline | Month 01 median for 'temp' = 265.480 applied to 4 row(s)
+2026-09-14 14:04:42 | DEBUG    | pipeline | Month 02 median for 'temp' = 265.895 applied to 6 row(s)
+2026-09-14 14:04:42 | WARNING  | pipeline | Imputed 10 row(s) in 'temp' with monthly median: temperature missing or outside plausible range 220-325 K (e.g. 0 K sensor faults)
+2026-09-14 14:04:42 | DEBUG    | pipeline | Month 07 median for 'rain_1h' = 0.000 applied to 1 row(s)
+2026-09-14 14:04:42 | WARNING  | pipeline | Imputed 1 row(s) in 'rain_1h' with monthly median: rainfall missing, negative or above 305 mm/h (world-record hourly rainfall)
+2026-09-14 14:04:42 | INFO     | pipeline | Impossible-value check on 'snow_1h': no values outside plausible range
+2026-09-14 14:04:42 | INFO     | pipeline | Impossible-value check on 'clouds_all': no values outside plausible range
+2026-09-14 14:04:42 | INFO     | pipeline | Impossible-value check on 'traffic_volume': no values outside 0-10000
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 5/6: handling statistical traffic-volume outliers
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=00 weekend=False: median=624 Q1=548 Q3=705 threshold=31 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=00 weekend=True: median=1303 Q1=1142 Q3=1472 threshold=65 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=01 weekend=False: median=381 Q1=339 Q3=435 threshold=19 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=01 weekend=True: median=795 Q1=710 Q3=905 threshold=40 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=02 weekend=False: median=288 Q1=260 Q3=329 threshold=14 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=02 weekend=True: median=609 Q1=540 Q3=684 threshold=30 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=03 weekend=False: median=356 Q1=335 Q3=381 threshold=18 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=03 weekend=True: median=391 Q1=355 Q3=436 threshold=20 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=04 weekend=False: median=846 Q1=792 Q3=888 threshold=42 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=04 weekend=True: median=379 Q1=315 Q3=429 threshold=19 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=05 weekend=False: median=2774 Q1=2611 Q3=2921 threshold=139 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=05 weekend=True: median=640 Q1=494 Q3=752 threshold=32 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=06 weekend=False: median=5588 Q1=5332 Q3=5799 threshold=279 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=06 weekend=True: median=1092 Q1=850 Q3=1351 threshold=55 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=07 weekend=False: median=6320 Q1=5949 Q3=6595 threshold=316 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=07 weekend=True: median=1544 Q1=1189 Q3=2003 threshold=77 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=08 weekend=False: median=5751 Q1=5361 Q3=6009 threshold=288 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=08 weekend=True: median=2266 Q1=1840 Q3=2883 threshold=113 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=09 weekend=False: median=5053 Q1=4768 Q3=5253 threshold=253 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=09 weekend=True: median=3147 Q1=2665 Q3=3631 threshold=157 flagged=3
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=10 weekend=False: median=4484 Q1=4272 Q3=4660 threshold=224 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=10 weekend=True: median=3722 Q1=3338 Q3=4112 threshold=186 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=11 weekend=False: median=4714 Q1=4474 Q3=4944 threshold=236 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=11 weekend=True: median=4114 Q1=3767 Q3=4466 threshold=206 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=12 weekend=False: median=4921 Q1=4682 Q3=5126 threshold=246 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=12 weekend=True: median=4442 Q1=4076 Q3=4822 threshold=222 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=13 weekend=False: median=4920 Q1=4699 Q3=5151 threshold=246 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=13 weekend=True: median=4457 Q1=4147 Q3=4756 threshold=223 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=14 weekend=False: median=5232 Q1=5000 Q3=5464 threshold=262 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=14 weekend=True: median=4457 Q1=4162 Q3=4741 threshold=223 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=15 weekend=False: median=5740 Q1=5501 Q3=5935 threshold=287 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=15 weekend=True: median=4421 Q1=4152 Q3=4699 threshold=221 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=16 weekend=False: median=6404 Q1=6128 Q3=6622 threshold=320 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=16 weekend=True: median=4438 Q1=4170 Q3=4714 threshold=222 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=17 weekend=False: median=5986 Q1=5668 Q3=6220 threshold=299 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=17 weekend=True: median=4262 Q1=3916 Q3=4541 threshold=213 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=18 weekend=False: median=4554 Q1=4288 Q3=4760 threshold=228 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=18 weekend=True: median=3920 Q1=3598 Q3=4222 threshold=196 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=19 weekend=False: median=3360 Q1=3113 Q3=3586 threshold=168 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=19 weekend=True: median=3340 Q1=3000 Q3=3573 threshold=167 flagged=1
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=20 weekend=False: median=2900 Q1=2672 Q3=3132 threshold=145 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=20 weekend=True: median=2890 Q1=2578 Q3=3164 threshold=144 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=21 weekend=False: median=2670 Q1=2397 Q3=3003 threshold=133 flagged=0
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=21 weekend=True: median=2708 Q1=2298 Q3=3037 threshold=135 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=22 weekend=False: median=2021 Q1=1694 Q3=2527 threshold=101 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=22 weekend=True: median=2374 Q1=1724 Q3=2990 threshold=119 flagged=2
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=23 weekend=False: median=1223 Q1=1051 Q3=1642 threshold=61 flagged=3
+2026-09-14 14:04:42 | DEBUG    | pipeline | Traffic outage check hour=23 weekend=True: median=1716 Q1=1072 Q3=2174 threshold=86 flagged=2
+2026-09-14 14:04:42 | WARNING  | pipeline | Imputed 47 row(s) in 'traffic_volume' with (hour, weekday/weekend) median: count below 5% of the typical volume for that hour on a non-holiday (sensor outage or full road closure)
+2026-09-14 14:04:42 | INFO     | pipeline | Cleaning step 6/6: final validation
+2026-09-14 14:04:42 | INFO     | pipeline | Final validation passed: 40575 rows, 11 columns, 0 missing values, unique hourly timestamps
+2026-09-14 14:04:42 | INFO     | pipeline | Saved cleaned dataset (40575 rows, 11 columns) to data/processed/traffic_clean.csv
+2026-09-14 14:04:42 | INFO     | pipeline | Stage 4/5: feature engineering
+2026-09-14 14:04:42 | INFO     | feature_engineering | Feature engineering input shape: 40575 rows x 11 columns
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Holiday dates found: 53 (propagated to all hours of each date)
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Cyclical encoding for 'hour' uses period=24
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Cyclical encoding for 'day_of_week' uses period=7
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Cyclical encoding for 'month' uses period=12
+2026-09-14 14:04:42 | INFO     | feature_engineering | Added time features: hour, day_of_week, is_weekend, is_holiday, is_rush_hour, cyclical sin/cos
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | One-hot encoded weather_main into 11 columns: ['weather_Clear', 'weather_Clouds', 'weather_Drizzle', 'weather_Fog', 'weather_Haze', 'weather_Mist', 'weather_Rain', 'weather_Smoke', 'weather_Snow', 'weather_Squall', 'weather_Thunderstorm']
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | weather_severity distribution: {0: 28489, 1: 8998, 2: 1687, 3: 1401}
+2026-09-14 14:04:42 | INFO     | feature_engineering | Added weather features: temp_c, 11 weather_* dummies, is_precipitation, is_low_visibility, is_severe_weather, is_freezing, weather_severity
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Z-score scaling 'temp_c': mean=8.2323 std=13.0939
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Min-max scaling 'clouds_all': min=0.0000 max=100.0000
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Min-max scaling 'log1p(rain_1h)': min=0.0000 max=4.0365
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Min-max scaling 'snow_1h': min=0.0000 max=0.5100
+2026-09-14 14:04:42 | INFO     | feature_engineering | Added scaled features: temp_c_scaled (z-score), clouds_all_scaled, rain_1h_scaled, snow_1h_scaled (min-max)
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Congestion quartile thresholds: Q1=1255.0, Q2(median)=3430.0, Q3=4952.0
+2026-09-14 14:04:42 | DEBUG    | feature_engineering | Congestion class counts: {'Low': 10139, 'Moderate': 10147, 'High': 10137, 'Very High': 10152}
+2026-09-14 14:04:42 | INFO     | feature_engineering | Added congestion target: congestion_level (Low, Moderate, High, Very High) based on traffic_volume quartiles
+2026-09-14 14:04:42 | INFO     | feature_engineering | Feature engineering output shape: 40575 rows x 49 columns
+2026-09-14 14:04:42 | INFO     | pipeline | Saved feature dataset (40575 rows, 49 columns) to data/processed/traffic_features.csv
+2026-09-14 14:04:42 | INFO     | pipeline | Stage 5/5: visualisation
+2026-09-14 14:04:42 | INFO     | visualizations | Generating 7 figures in figures
+2026-09-14 14:04:42 | DEBUG    | visualizations | Workdays (Mon-Fri, excl. holidays) hourly mean peak: hour 16 (6325 vehicles)
+2026-09-14 14:04:42 | DEBUG    | visualizations | Weekends hourly mean peak: hour 13 (4426 vehicles)
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig01_hourly_profile_weekday_weekend.png
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig02_heatmap_day_hour.png
+2026-09-14 14:04:43 | DEBUG    | visualizations | Daytime workday mean volume by weather: {'Snow': 4873.0, 'Haze': 5170.0, 'Thunderstorm': 5244.0, 'Rain': 5265.0, 'Clear': 5308.0, 'Clouds': 5320.0, 'Drizzle': 5372.0, 'Mist': 5424.0, 'Fog': 5655.0}
+2026-09-14 14:04:43 | DEBUG    | visualizations | Weather categories excluded from figure (< 50 samples): ['Smoke']
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig03_weather_impact_daytime.png
+2026-09-14 14:04:43 | DEBUG    | visualizations | Pearson correlation temp_c vs traffic_volume (workday daytime): 0.108
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig04_temperature_vs_traffic.png
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig05_traffic_distribution.png
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig06_congestion_share_by_hour.png
+2026-09-14 14:04:43 | DEBUG    | visualizations | Monthly trend: 11 month(s) with < 7 days of data shown as gaps
+2026-09-14 14:04:43 | INFO     | visualizations | Saved figure: figures/fig07_monthly_trend.png
+2026-09-14 14:04:43 | INFO     | visualizations | All 7 figures saved successfully
+2026-09-14 14:04:43 | INFO     | pipeline | Pipeline finished successfully

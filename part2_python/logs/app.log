@@ -1,0 +1,15 @@
+2026-09-14 14:05:28 | INFO     | traffic_app | Command invoked: lookup with arguments {'datetime': '2017-12-25 17:00'}
+2026-09-14 14:05:28 | INFO     | traffic_app | Command 'lookup' completed successfully
+2026-09-14 14:05:29 | INFO     | traffic_app | Command invoked: lookup with arguments {'datetime': '2016-13-40 25:00'}
+2026-09-14 14:05:29 | ERROR    | traffic_app | Invalid input for 'lookup': Malformed date/time '2016-13-40 25:00'. Use 'YYYY-MM-DD HH:MM', e.g. '2016-05-10 08:00'.
+2026-09-14 14:05:30 | INFO     | traffic_app | Command invoked: peaks with arguments {'top': 5, 'day_type': 'workday'}
+2026-09-14 14:05:30 | INFO     | traffic_app | Command 'peaks' completed successfully
+2026-09-14 14:05:30 | INFO     | traffic_app | Command invoked: compare with arguments {}
+2026-09-14 14:05:30 | INFO     | traffic_app | Command 'compare' completed successfully
+2026-09-14 14:05:31 | INFO     | traffic_app | Command invoked: recommend with arguments {'day': 'friday', 'start': 7, 'end': 19, 'top': 3}
+2026-09-14 14:05:31 | INFO     | traffic_app | Command 'recommend' completed successfully
+2026-09-14 14:05:32 | INFO     | traffic_app | Command invoked: recommend with arguments {'day': 'funday', 'start': 6, 'end': 21, 'top': 3}
+2026-09-14 14:05:32 | ERROR    | traffic_app | Invalid input for 'recommend': Unrecognised day 'funday'. Use a day name such as 'Monday' or 'fri'.
+2026-09-14 14:05:33 | INFO     | traffic_app | Command invoked: weather with arguments {'condition': 'Snow'}
+2026-09-14 14:05:33 | INFO     | traffic_app | Command 'weather' completed successfully
+2026-09-14 14:05:34 | ERROR    | traffic_app | Invalid command-line arguments: argument --top: invalid int value: 'abc'

@@ -1,0 +1,43 @@
+2026-09-14 14:04:44 | INFO     | pipeline | Pipeline started (log level=INFO, log file=logs/pipeline_error_example.log)
+2026-09-14 14:04:44 | INFO     | pipeline | Stage 1/5: load raw data
+2026-09-14 14:04:44 | INFO     | pipeline | Loading raw data from data/raw/Metro_Traffic_MISSING.csv
+2026-09-14 14:04:44 | ERROR    | pipeline | Pipeline aborted: Raw data file not found: data/raw/Metro_Traffic_MISSING.csv
+Traceback (most recent call last):
+  File "C:\Users\User\OneDrive\Labs\CAPSTONE PROJECT\capstone_part2\pipeline.py", line 177, in load_raw_data
+    df = pd.read_csv(path, keep_default_na=False, na_values=[""])
+  File "C:\Users\User\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\User\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\User\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\User\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py", line 1904, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\User\anaconda3\Lib\site-packages\pandas\io\common.py", line 930, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'data\\raw\\Metro_Traffic_MISSING.csv'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\OneDrive\Labs\CAPSTONE PROJECT\capstone_part2\pipeline.py", line 604, in main
+    run_pipeline(args.input, args.clean_output, args.features_output, figures_dir)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\OneDrive\Labs\CAPSTONE PROJECT\capstone_part2\pipeline.py", line 561, in run_pipeline
+    raw = load_raw_data(input_path)
+  File "C:\Users\User\OneDrive\Labs\CAPSTONE PROJECT\capstone_part2\pipeline.py", line 179, in load_raw_data
+    raise PipelineError(f"Raw data file not found: {display_path(path)}") from exc
+PipelineError: Raw data file not found: data/raw/Metro_Traffic_MISSING.csv

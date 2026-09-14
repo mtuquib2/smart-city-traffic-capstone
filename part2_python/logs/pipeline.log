@@ -1,0 +1,48 @@
+2026-09-14 14:04:45 | INFO     | pipeline | Pipeline started (log level=INFO, log file=logs/pipeline.log)
+2026-09-14 14:04:45 | INFO     | pipeline | Stage 1/5: load raw data
+2026-09-14 14:04:45 | INFO     | pipeline | Loading raw data from data/raw/Metro_Interstate_Traffic_Volume.csv
+2026-09-14 14:04:46 | INFO     | pipeline | Raw data loaded successfully: 48204 rows, 9 columns
+2026-09-14 14:04:46 | INFO     | pipeline | Stage 2/5: validate schema
+2026-09-14 14:04:46 | INFO     | pipeline | Validating schema against 9 expected columns
+2026-09-14 14:04:46 | INFO     | pipeline | Schema validation passed: all 9 expected columns present
+2026-09-14 14:04:46 | INFO     | pipeline | Stage 3/5: clean data
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 1/6: standardising categorical values
+2026-09-14 14:04:46 | INFO     | pipeline | Standardised 'holiday': no inconsistent labels found
+2026-09-14 14:04:46 | INFO     | pipeline | Standardised 'weather_main': no inconsistent labels found
+2026-09-14 14:04:46 | WARNING  | pipeline | Standardised 'weather_description': 1730 row(s) modified (inconsistent casing, e.g. 'Sky is Clear', 'SQUALLS')
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 2/6: parsing and validating date_time
+2026-09-14 14:04:46 | INFO     | pipeline | Parsed date_time: 48204 valid timestamps from 2012-10-02 09:00:00 to 2018-09-30 23:00:00
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 3/6: removing duplicates
+2026-09-14 14:04:46 | WARNING  | pipeline | Dropped 17 row(s) in duplicate removal: exact duplicate records
+2026-09-14 14:04:46 | WARNING  | pipeline | Dropped 7612 row(s) in duplicate removal: repeated hourly timestamps (multiple weather conditions reported for the same hour; primary condition kept)
+2026-09-14 14:04:46 | INFO     | pipeline | Duplicate removal complete: 40575 unique hourly records remain
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 4/6: handling physically impossible values
+2026-09-14 14:04:46 | WARNING  | pipeline | Imputed 10 row(s) in 'temp' with monthly median: temperature missing or outside plausible range 220-325 K (e.g. 0 K sensor faults)
+2026-09-14 14:04:46 | WARNING  | pipeline | Imputed 1 row(s) in 'rain_1h' with monthly median: rainfall missing, negative or above 305 mm/h (world-record hourly rainfall)
+2026-09-14 14:04:46 | INFO     | pipeline | Impossible-value check on 'snow_1h': no values outside plausible range
+2026-09-14 14:04:46 | INFO     | pipeline | Impossible-value check on 'clouds_all': no values outside plausible range
+2026-09-14 14:04:46 | INFO     | pipeline | Impossible-value check on 'traffic_volume': no values outside 0-10000
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 5/6: handling statistical traffic-volume outliers
+2026-09-14 14:04:46 | WARNING  | pipeline | Imputed 47 row(s) in 'traffic_volume' with (hour, weekday/weekend) median: count below 5% of the typical volume for that hour on a non-holiday (sensor outage or full road closure)
+2026-09-14 14:04:46 | INFO     | pipeline | Cleaning step 6/6: final validation
+2026-09-14 14:04:46 | INFO     | pipeline | Final validation passed: 40575 rows, 11 columns, 0 missing values, unique hourly timestamps
+2026-09-14 14:04:46 | INFO     | pipeline | Saved cleaned dataset (40575 rows, 11 columns) to data/processed/traffic_clean.csv
+2026-09-14 14:04:46 | INFO     | pipeline | Stage 4/5: feature engineering
+2026-09-14 14:04:46 | INFO     | feature_engineering | Feature engineering input shape: 40575 rows x 11 columns
+2026-09-14 14:04:46 | INFO     | feature_engineering | Added time features: hour, day_of_week, is_weekend, is_holiday, is_rush_hour, cyclical sin/cos
+2026-09-14 14:04:46 | INFO     | feature_engineering | Added weather features: temp_c, 11 weather_* dummies, is_precipitation, is_low_visibility, is_severe_weather, is_freezing, weather_severity
+2026-09-14 14:04:46 | INFO     | feature_engineering | Added scaled features: temp_c_scaled (z-score), clouds_all_scaled, rain_1h_scaled, snow_1h_scaled (min-max)
+2026-09-14 14:04:46 | INFO     | feature_engineering | Added congestion target: congestion_level (Low, Moderate, High, Very High) based on traffic_volume quartiles
+2026-09-14 14:04:46 | INFO     | feature_engineering | Feature engineering output shape: 40575 rows x 49 columns
+2026-09-14 14:04:46 | INFO     | pipeline | Saved feature dataset (40575 rows, 49 columns) to data/processed/traffic_features.csv
+2026-09-14 14:04:46 | INFO     | pipeline | Stage 5/5: visualisation
+2026-09-14 14:04:46 | INFO     | visualizations | Generating 7 figures in figures
+2026-09-14 14:04:46 | INFO     | visualizations | Saved figure: figures/fig01_hourly_profile_weekday_weekend.png
+2026-09-14 14:04:46 | INFO     | visualizations | Saved figure: figures/fig02_heatmap_day_hour.png
+2026-09-14 14:04:47 | INFO     | visualizations | Saved figure: figures/fig03_weather_impact_daytime.png
+2026-09-14 14:04:47 | INFO     | visualizations | Saved figure: figures/fig04_temperature_vs_traffic.png
+2026-09-14 14:04:47 | INFO     | visualizations | Saved figure: figures/fig05_traffic_distribution.png
+2026-09-14 14:04:47 | INFO     | visualizations | Saved figure: figures/fig06_congestion_share_by_hour.png
+2026-09-14 14:04:47 | INFO     | visualizations | Saved figure: figures/fig07_monthly_trend.png
+2026-09-14 14:04:47 | INFO     | visualizations | All 7 figures saved successfully
+2026-09-14 14:04:47 | INFO     | pipeline | Pipeline finished successfully
