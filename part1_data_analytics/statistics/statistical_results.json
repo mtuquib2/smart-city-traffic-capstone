@@ -1,0 +1,59 @@
+{
+  "descriptive": {
+    "traffic_volume": {
+      "count": 48204.0,
+      "mean": 3259.818,
+      "std": 1986.861,
+      "min": 0.0,
+      "25%": 1193.0,
+      "50%": 3380.0,
+      "75%": 4933.0,
+      "max": 7280.0,
+      "skewness": -0.089
+    },
+    "temp": {
+      "count": 48204.0,
+      "mean": 281.206,
+      "std": 13.338,
+      "min": 0.0,
+      "25%": 272.16,
+      "50%": 282.45,
+      "75%": 291.806,
+      "max": 310.07,
+      "skewness": -2.247
+    }
+  },
+  "correlation": {
+    "pearson_r_raw": 0.13029879817112655,
+    "pearson_p_raw": 1.6364651458974578e-181,
+    "pearson_r_cleaned": 0.13229131507313124,
+    "pearson_p_cleaned": 4.711844607331171e-187,
+    "spearman_rho_cleaned": 0.13258882504747385,
+    "spearman_p_cleaned": 6.80494125415266e-188,
+    "r_squared_cleaned": 0.01750099204377848
+  },
+  "probability": {
+    "P_congestion": 0.1472906812712638,
+    "P_clear": 0.277798522944154,
+    "P_congestion_and_clear": 0.03657372832130114,
+    "P_clear_given_congestion": 0.2483098591549296,
+    "P_high_temp_given_congestion": 0.26295774647887327,
+    "P_congestion_times_P_clear": 0.04091713370059525,
+    "odds_congestion_clear": 0.15161678706570347,
+    "odds_congestion_clouds": 0.20617244670696788,
+    "odds_ratio_clear_vs_clouds": 0.7353882125733117
+  },
+  "chi_square": {
+    "chi2": 165.78630625538213,
+    "dof": 9,
+    "p_value": 4.6519248246768615e-31,
+    "cramers_v": 0.058645242826415526
+  },
+  "weekday_weekend": {
+    "weekday_mean": 3533.5967942958173,
+    "weekend_mean": 2570.507261183682,
+    "welch_t": 55.675967173368896,
+    "p_value": 0.0,
+    "cohens_d": 0.5264418454700545
+  }
+}
