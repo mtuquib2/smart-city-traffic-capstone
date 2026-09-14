@@ -9,22 +9,50 @@ mobility solution with ML, MLOps and responsible AI (Part 3).
 > defined in the brief (High/Severe congestion during severe or low-visibility weather). See
 > [part3_machine_learning/README.md](part3_machine_learning/README.md).
 
-**Final report:** [part3_machine_learning/reports/FINAL_CAPSTONE_REPORT.md](part3_machine_learning/reports/FINAL_CAPSTONE_REPORT.md) ·
-**Bias & fairness report:** [part3_machine_learning/reports/BIAS_FAIRNESS_REPORT.md](part3_machine_learning/reports/BIAS_FAIRNESS_REPORT.md)
+**Final report:** [PDF](part3_machine_learning/reports/FINAL_CAPSTONE_REPORT.pdf) · [Markdown](part3_machine_learning/reports/FINAL_CAPSTONE_REPORT.md) ·
+**Responsible AI report:** [PDF](part3_machine_learning/responsible_ai_report.pdf) · [Markdown](part3_machine_learning/reports/BIAS_FAIRNESS_REPORT.md) ·
+**Part 1 insights report:** [PDF](part1_data_analytics/insights_report.pdf)
 
 ## Repository structure
 
+The layout follows the course's suggested GitHub submission template. Supporting folders beyond the template
+(tests, logs, reports, data) are kept so every result can be reproduced.
+
 ```
 smart-city-traffic-capstone/
-├── part1_data_analytics/     # Part 1: SQLite database, SQL analyses, Power BI dashboard, summary report
-├── part2_python/             # Part 2: logged cleaning pipeline, feature engineering, figures, CLI app, tests
-├── part3_machine_learning/   # Part 3: ML/DL models, SHAP, MLflow, recommender, FastAPI, monitoring, reports
+│
+├── part1_data_analytics/
+│   ├── sql/                        # SQLite database, six SQL analyses, DB Browser project
+│   ├── powerbi/                    # Power BI dashboard (CAPSTONE.pbix)
+│   ├── statistics/                 # statistical_analysis.py + generated results (correlation, probability, tests)
+│   └── insights_report.pdf         # Part 1 insights report (editable .docx alongside)
+│
+├── part2_python/
+│   ├── pipeline.py                 # load → validate → clean → features → figures (entry point)
+│   ├── feature_engineering.py
+│   ├── visualizations.py
+│   ├── cli_app/                    # traffic_app.py command-line analytics application
+│   ├── figures/                    # 7 Matplotlib figures
+│   ├── pipeline.log                # sample pipeline log (more samples in logs/)
+│   ├── README.md
+│   └── (REPORT.md, tests/, logs/, data/, requirements.txt)
+│
+├── part3_machine_learning/
+│   ├── notebooks/                  # executed results walkthrough notebook
+│   ├── models/                     # champion models, metadata cards, model registry, serving reference
+│   ├── mlflow/                     # MLflow logs: mlflow.db (tracking + model registry) and mlartifacts/
+│   ├── deployment/                 # FastAPI app, uvicorn launcher, demo client
+│   ├── recommendation_system/      # travel-time recommender + CLI + example recommendations
+│   ├── monitoring/                 # drift/error monitoring, PASS/ALERT dashboard and report
+│   ├── responsible_ai_report.pdf   # bias, fairness, governance and sustainability
+│   └── (ML scripts *.py, run_all.py, figures/, reports/, logs/, tests/, README.md)
+│
 └── README.md
 ```
 
 | Part | Highlights | Start here |
 |---|---|---|
-| 1 Data analytics | SQL trend, correlation and probability analyses; Power BI traffic dashboard | [part1_data_analytics/README.md](part1_data_analytics/README.md) |
+| 1 Data analytics | SQL trend, correlation and probability analyses; statistical hypothesis tests; Power BI traffic dashboard; insights report | [part1_data_analytics/README.md](part1_data_analytics/README.md) |
 | 2 Python pipeline | Schema validation, 6 logged cleaning steps, 38 features, 7 figures, query CLI, 22 tests | [part2_python/README.md](part2_python/README.md) |
 | 3 Machine learning | Classifier + regressor, K-means + Apriori, LSTM + SHAP, MLflow registry, travel-time recommender, FastAPI, PASS/ALERT monitoring, bias/fairness and sustainability | [part3_machine_learning/README.md](part3_machine_learning/README.md) |
 
