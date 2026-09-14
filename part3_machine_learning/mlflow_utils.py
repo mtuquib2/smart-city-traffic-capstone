@@ -12,10 +12,17 @@ from __future__ import annotations
 import json
 import logging
 import os
+import shutil
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 os.environ.setdefault("MLFLOW_ENABLE_ARTIFACTS_PROGRESS_BAR", "false")
+# MLflow records the git commit of each run via GitPython; point it at Git if it is not on PATH.
+_GIT_FALLBACK = Path(r"C:\Program Files\Git\cmd\git.exe")
+if shutil.which("git") is None and _GIT_FALLBACK.exists():
+    os.environ.setdefault("GIT_PYTHON_GIT_EXECUTABLE", str(_GIT_FALLBACK))
+os.environ.setdefault("GIT_PYTHON_REFRESH", "quiet")
 
 import mlflow  # noqa: E402
 import pandas as pd  # noqa: E402
