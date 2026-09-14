@@ -38,9 +38,10 @@ MODEL_REGISTRY_FILE = MODELS_DIR / "model_registry.json"
 # ---------------------------------------------------------------------------
 # MLflow (SQLite backend enables the model registry; artifacts stored locally)
 # ---------------------------------------------------------------------------
-MLFLOW_DB = PROJECT_ROOT / "mlflow.db"
+MLFLOW_DIR = PROJECT_ROOT / "mlflow"          # no __init__.py: must never shadow the mlflow library
+MLFLOW_DB = MLFLOW_DIR / "mlflow.db"
 MLFLOW_TRACKING_URI = f"sqlite:///{MLFLOW_DB.as_posix()}"
-MLFLOW_ARTIFACT_ROOT = PROJECT_ROOT / "mlartifacts"
+MLFLOW_ARTIFACT_ROOT = MLFLOW_DIR / "mlartifacts"
 EXPERIMENT_CLASSIFICATION = "traffic-risk-classification"
 EXPERIMENT_REGRESSION = "traffic-volume-regression"
 EXPERIMENT_UNSUPERVISED = "traffic-unsupervised"

@@ -181,17 +181,17 @@ this data size and horizon it is the model I would deploy.
 | | |
 |---|---|
 | **Why chosen** | The project trains many candidates across five experiments. Without tracking, comparisons would rely on console output and memory. MLflow connects directly to the MLOps tasks: the same registry versions and `champion` alias are what the API, monitoring and version history consume. |
-| **How implemented** | `mlflow_utils.py` uses a **SQLite backend (`mlflow.db`)**, which enables the Model Registry, with local artifacts in `mlartifacts/`. There are five experiments: classification, regression, unsupervised, LSTM and monitoring. Each run logs hyperparameters, validation and test metrics, training time, tags (task, algorithm, label type) and the git commit. Scikit-learn models are logged with an inferred signature and input example; LSTMs with `mlflow.pytorch`, including per-epoch loss and validation-MAE curves. Every candidate is **registered as a new model version**. The best validation candidate receives the **`champion` alias** plus a selection-reason tag and is exported to `models/`. Exports: `reports/metrics/mlflow_runs_summary.csv` (26 runs) and `reports/MODEL_VERSIONS.md`. |
+| **How implemented** | `mlflow_utils.py` uses a **SQLite backend (`mlflow/mlflow.db`)**, which enables the Model Registry, with local artifacts in `mlflow/mlartifacts/`. There are five experiments: classification, regression, unsupervised, LSTM and monitoring. Each run logs hyperparameters, validation and test metrics, training time, tags (task, algorithm, label type) and the git commit. Scikit-learn models are logged with an inferred signature and input example; LSTMs with `mlflow.pytorch`, including per-epoch loss and validation-MAE curves. Every candidate is **registered as a new model version**. The best validation candidate receives the **`champion` alias** plus a selection-reason tag and is exported to `models/`. Exports: `reports/metrics/mlflow_runs_summary.csv` (26 runs) and `reports/MODEL_VERSIONS.md`. |
 | **Value added** | Side-by-side comparison of 10 registered versions across three models. Selection is auditable (which version, why, trained on what, from which commit). Rolling back is a single alias change. Monitoring runs are logged next to training runs, so a performance history exists. It also exposed issues: the tied RF/HGB validation MAE, and the LSTM v2 costing 4.4× the energy for no gain. |
 | **Limitations** | The local SQLite store has no authentication or concurrency, and records **absolute artifact paths**, so artifacts must be regenerated on another machine (the database and CSV exports remain readable). MLflow warned that **pickled models can execute code when loaded**; this is acceptable for trusted local artifacts, but production would need signed artifacts or a safe format. MLflow 3.15 declares `pandas<3` while the project ran on pandas 3.0.5; everything worked, but it is a supply-chain risk to pin. Tracking records *what* happened, not *whether it was right*, so governance still needs human review. |
 
-Browse the tracked runs with `mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000` from `part3_machine_learning/`.
+Browse the tracked runs with `mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db --port 5000` from `part3_machine_learning/`.
 
 ---
 
 ## 8. Task 5 – Travel-time recommendation system
 
-**Code:** `recommender.py` · **Examples:** `reports/recommendation_examples.md`
+**Code:** `recommendation_system/recommender.py` · **Examples:** `recommendation_system/recommendation_examples.md`
 
 Because the data covers one corridor, the system recommends **when** to travel, not which route. For a date, an
 acceptable time range, a trip-window length and forecast weather, it:
@@ -208,7 +208,7 @@ Example output (weekday, snow, 2-hour window, 07:00–20:00):
 Other scenarios: a clear weekday with a 06:00–21:00 range recommends 20:00–21:00 (56% lighter than 07:00–08:00),
 with 10:00–11:00 as the best daytime alternative; a mist morning (06:00–12:00) recommends 10:00–11:00 and adds a
 proxy-risk caution for the peak hours; a public holiday (4 July) recommends 08:00–09:00 at around 2,000 vehicles/hour,
-46% lighter than the afternoon. The same engine powers the CLI (`python recommender.py --date …`) and the API's `/recommend` endpoint.
+46% lighter than the afternoon. The same engine powers the CLI (`python -m recommendation_system.recommender --date …`) and the API's `/recommend` endpoint.
 
 ---
 
@@ -220,17 +220,17 @@ regressor **v3** (HGB v1), LSTM **v1**. Each served model carries a metadata car
 
 **6.2 Experiment tracking.** See §7. There are 26 MLflow runs across 5 experiments, all with params, metrics, artifacts and versions.
 
-**6.3 Deployment (FastAPI).** `api/app.py` serves:
+**6.3 Deployment (FastAPI).** `deployment/app.py` serves:
 * `GET /health` and `GET /model-info` (versions, metrics, proxy disclaimer);
 * `POST /predict/traffic-volume`, `POST /predict/risk` and `POST /recommend`.
 
 Inputs are validated with pydantic (ranges, weather enum). Invalid requests return HTTP 422 and are logged as a
 WARNING, and every prediction is appended to an audit log. It was verified both in-process and over HTTP with uvicorn
-(`python -m api.serve`): all 8 demo calls returned the expected status codes (`reports/api_demo_responses.json`,
+(`python -m deployment.serve`): all 8 demo calls returned the expected status codes (`reports/api_demo_responses.json`,
 `logs/api.log`). For example, 08:00 on a clear weekday gives ≈ 6,000 vehicles/hour (Severe), and the same hour in mist
 gives proxy risk p = 0.996 against 0.003 in clear weather.
 
-**6.4 Monitoring.** `monitoring.py` replays Jan–Sep 2018 as monthly production batches against the champion regressor:
+**6.4 Monitoring.** `monitoring/monitoring.py` replays Jan–Sep 2018 as monthly production batches against the champion regressor:
 * **Feature drift:** PSI per feature against the **same calendar month of 2017**, with cloud cover and weather treated
   as categories.
 * **Prediction error drift:** batch MAE against validation MAE, plus bias.
@@ -292,9 +292,9 @@ The full analysis is in **`reports/BIAS_FAIRNESS_REPORT.md`**.
 | Deliverable | Location |
 |---|---|
 | Models, notebooks and scripts | `part3_machine_learning/*.py`, `models/`, `notebooks/part3_results_walkthrough.ipynb` |
-| MLflow logs | `mlflow.db`, `mlartifacts/`, `reports/metrics/mlflow_runs_summary.csv`, `reports/MODEL_VERSIONS.md` |
-| Deployment simulation | `api/` (FastAPI app, server launcher, demo client), `reports/api_demo_responses.json` |
-| Monitoring and alerting | `monitoring.py`, `monitoring/dashboard.html`, `monitoring/monitoring_report.json` |
-| Recommendation engine | `recommender.py`, `models/serving_reference.json`, `reports/recommendation_examples.md` |
-| Bias and fairness report | `reports/BIAS_FAIRNESS_REPORT.md` |
+| MLflow logs | `mlflow/mlflow.db`, `mlflow/mlartifacts/`, `reports/metrics/mlflow_runs_summary.csv`, `reports/MODEL_VERSIONS.md` |
+| Deployment simulation | `deployment/` (FastAPI app, server launcher, demo client), `reports/api_demo_responses.json` |
+| Monitoring and alerting | `monitoring/monitoring.py`, `monitoring/dashboard.html`, `monitoring/monitoring_report.json` |
+| Recommendation engine | `recommendation_system/` (engine, CLI, examples), `models/serving_reference.json` |
+| Responsible AI report (bias, fairness, governance, sustainability) | `responsible_ai_report.pdf` (source: `reports/BIAS_FAIRNESS_REPORT.md`) |
 | Logs | `logs/run_all.log` (full pipeline), `logs/api.log`, `logs/api_demo.log` |

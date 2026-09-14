@@ -2,7 +2,7 @@
 run_all.py - Entry point that reproduces every Part 3 result end to end.
 
     python run_all.py                       # all stages, INFO logging -> logs/run_all.log
-    python run_all.py --fresh-mlflow        # wipe mlflow.db / mlartifacts first (clean version numbers)
+    python run_all.py --fresh-mlflow        # wipe mlflow/mlflow.db + mlflow/mlartifacts first (clean version numbers)
     python run_all.py --stages monitoring fairness --log-level DEBUG
 
 Stages (in order)
@@ -53,13 +53,13 @@ def run_stage(name: str, df):
         import explainability
         explainability.run(df)
     elif name == "recommend":
-        import recommender
+        from recommendation_system import recommender
         recommender.run(df)
     elif name == "api":
-        from api import demo_client
+        from deployment import demo_client
         demo_client.run()
     elif name == "monitoring":
-        import monitoring
+        from monitoring import monitoring
         monitoring.run(df)
     elif name == "fairness":
         import fairness_analysis

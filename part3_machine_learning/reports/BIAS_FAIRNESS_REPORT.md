@@ -2,7 +2,7 @@
 
 **Capstone Part 3 · I-94 Traffic Intelligence Solution**
 
-All figures below come from `fairness_analysis.py`, `monitoring.py` and `explainability.py`. The source tables are in
+All figures below come from `fairness_analysis.py`, `monitoring/monitoring.py` and `explainability.py`. The source tables are in
 `reports/metrics/` (files starting `fairness_`, `sustainability_` and `shap_`), and the charts are in `figures/task7_responsible_ai/`.
 
 > **Accident data statement.** No real accident dataset was sourced. The classification model predicts a documented
@@ -52,6 +52,8 @@ It flags 1,927 of 40,575 hours (4.75%).
 | Weekdays | 4,504 | 192 | 0.88× | +16 | 5% |
 | Night 00–05 | 1,624 | 85 | 0.39× | −2 | 10% |
 
+![Regression error by segment](../figures/task7_responsible_ai/task7_regression_error_by_segment.png)
+
 Interpretation:
 
 * **Snow and holidays are the least served conditions.** The model over-predicts traffic in both, so it overstates congestion when roads are actually quieter. SHAP's local example (Thu 11 Jan 2018 08:00, snow) shows the mechanism: the prediction was 5,124 against 4,475 actual, because snow contributed only −49 through `weather_severity` against strong time-of-day effects. For the recommender this means travel windows in snow are ranked using exaggerated volumes. The advice text therefore adds explicit snow guidance, but the forecast volumes should be treated as upper bounds.
@@ -67,6 +69,8 @@ Interpretation:
 | Public holidays | 6 | 1.00 | 0.06 | **0.38** |
 | Evening 19–23 | 9 | **0.33** | 0.00 | 0.50 |
 | Clear, Cloudy, Rain, Snow, Night | **0** | undefined | 0.00 | undefined |
+
+![Classifier error by segment](../figures/task7_responsible_ai/task7_classifier_error_by_segment.png)
 
 Errors concentrate where positives are rare or context is unusual. Thunderstorm hours carry a 23% false-alarm rate. Evening risk hours are mostly missed, with a recall of 0.33 on only 9 examples. Holiday alerts are right just 38% of the time. For most conditions fairness metrics **cannot be computed at all**, because the proxy has no positives there. That is itself the most important fairness finding.
 

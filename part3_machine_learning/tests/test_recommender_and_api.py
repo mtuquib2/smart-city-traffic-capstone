@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 @requires_models
 def test_recommendation_is_plain_language_and_within_range():
-    from recommender import TravelRecommender, TripRequest
+    from recommendation_system.recommender import TravelRecommender, TripRequest
 
     rec = TravelRecommender().recommend(TripRequest(date(2018, 3, 13), 7, 19, 2, "Snow"))
     assert rec.message.startswith("For a weekday journey")
@@ -23,14 +23,14 @@ def test_recommendation_is_plain_language_and_within_range():
 
 @requires_models
 def test_holiday_is_detected_from_calendar():
-    from recommender import TravelRecommender, TripRequest
+    from recommendation_system.recommender import TravelRecommender, TripRequest
 
     assert TravelRecommender().recommend(TripRequest(date(2017, 7, 4), 8, 20, 1, "Clear")).day_type == "holiday"
 
 
 @requires_models
 def test_invalid_request_is_rejected():
-    from recommender import TripRequest
+    from recommendation_system.recommender import TripRequest
 
     with pytest.raises(ValueError):
         TripRequest(date(2018, 3, 13), 20, 7, 1, "Clear").validate()
@@ -40,7 +40,7 @@ def test_invalid_request_is_rejected():
 def test_api_endpoints():
     from fastapi.testclient import TestClient
 
-    from api.app import app
+    from deployment.app import app
 
     with TestClient(app) as client:
         assert client.get("/health").json()["status"] == "ok"

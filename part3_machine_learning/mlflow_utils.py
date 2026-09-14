@@ -1,10 +1,10 @@
 """
 mlflow_utils.py - MLflow experiment tracking, model registry and version export helpers.
 
-Backend: SQLite (`mlflow.db`, required for the Model Registry) with artifacts in
-`mlartifacts/`. Browse with:
+Backend: SQLite (`mlflow/mlflow.db`, required for the Model Registry) with artifacts in
+`mlflow/mlartifacts/`. Browse with:
 
-    mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
+    mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db --port 5000
 """
 
 from __future__ import annotations
@@ -127,7 +127,7 @@ def export_model_versions_markdown() -> None:
     lines = [
         "# Model Versions",
         "",
-        "Generated from `models/model_registry.json`, which mirrors the MLflow Model Registry in `mlflow.db`.",
+        "Generated from `models/model_registry.json`, which mirrors the MLflow Model Registry in `mlflow/mlflow.db`.",
         f"The version tagged **{CHAMPION_ALIAS}** is the one served by the API. Champions are selected on the",
         "**validation** split (2017); test metrics (Jan–Sep 2018) are reported for transparency only.",
         "",

@@ -11,7 +11,7 @@ built on the Part 2 cleaned I-94 traffic data.
 > a prediction of real accidents**. Its risks (circularity, blind spots, sensitivity to cleaning choices) are analysed in
 > [`reports/BIAS_FAIRNESS_REPORT.md`](reports/BIAS_FAIRNESS_REPORT.md).
 
-**Reports:** [Final capstone report](reports/FINAL_CAPSTONE_REPORT.md) · [Bias & fairness, governance & sustainability](reports/BIAS_FAIRNESS_REPORT.md) · [Model versions](reports/MODEL_VERSIONS.md) · [Recommendation examples](reports/recommendation_examples.md) · [Walkthrough notebook](notebooks/part3_results_walkthrough.ipynb)
+**Reports:** [Final capstone report](reports/FINAL_CAPSTONE_REPORT.md) ([PDF](reports/FINAL_CAPSTONE_REPORT.pdf)) · [Responsible AI report (PDF)](responsible_ai_report.pdf) ([Markdown source](reports/BIAS_FAIRNESS_REPORT.md)) · [Model versions](reports/MODEL_VERSIONS.md) · [Recommendation examples](recommendation_system/recommendation_examples.md) · [Walkthrough notebook](notebooks/part3_results_walkthrough.ipynb)
 
 ---
 
@@ -45,17 +45,14 @@ part3_machine_learning/
 ├── deep_learning.py         # Task 3: PyTorch LSTM, baselines, lag-feature surrogate
 ├── explainability.py        # Task 3: SHAP (surrogate, regressor, classifier)
 ├── mlflow_utils.py          # Task 4 / 6.1-6.2: tracking, registry, version + run exports
-├── recommender.py           # Task 5: travel-time recommendation engine + CLI
-├── api/
-│   ├── app.py               # Task 6.3: FastAPI service
-│   ├── serve.py             #   launcher (uvicorn + project logging)
-│   └── demo_client.py       #   calls every endpoint, saves responses
-├── monitoring.py            # Task 6.4-6.5: drift/error/integrity checks, PASS/ALERT dashboard
+├── recommendation_system/   # Task 5: recommender.py (engine + CLI), recommendation_examples.md
+├── deployment/              # Task 6.3: app.py (FastAPI), serve.py (uvicorn launcher), demo_client.py
+├── monitoring/              # Task 6.4-6.5: monitoring.py, monitoring_report.json, dashboard.html
 ├── fairness_analysis.py     # Task 7: coverage, proxy-label bias, segment errors, footprint
 ├── plotting.py              # shared chart style (reuses Part 2 palette)
 ├── models/                  # champion models, metadata cards, model_registry.json, serving_reference.json
-├── mlflow.db, mlartifacts/  # MLflow tracking store + registry + artifacts (MLflow logs)
-├── monitoring/              # monitoring_report.json, dashboard.html
+├── mlflow/                  # MLflow logs: mlflow.db (tracking + registry) and mlartifacts/
+├── responsible_ai_report.pdf  # Task 7: bias, fairness, governance and sustainability
 ├── figures/                 # task1_… to task7_… PNG figures
 ├── reports/                 # FINAL_CAPSTONE_REPORT.md, BIAS_FAIRNESS_REPORT.md, MODEL_VERSIONS.md, metrics/*.csv
 ├── notebooks/               # part3_results_walkthrough.ipynb (executed)
@@ -89,17 +86,17 @@ python run_all.py --stages monitoring fairness --log-level DEBUG
 **Recommendation CLI:**
 
 ```bash
-python recommender.py --date 2018-01-16 --earliest 7 --latest 19 --window 2 --weather Snow
+python -m recommendation_system.recommender --date 2018-01-16 --earliest 7 --latest 19 --window 2 --weather Snow
 ```
 
 **Serve the API** (Swagger docs at http://127.0.0.1:8000/docs), then call it from a second terminal:
 
 ```bash
-python -m api.serve
+python -m deployment.serve
 ```
 
 ```bash
-python -m api.demo_client --url http://127.0.0.1:8000
+python -m deployment.demo_client --url http://127.0.0.1:8000
 ```
 
 Example request:
@@ -111,13 +108,13 @@ curl -X POST http://127.0.0.1:8000/predict/traffic-volume -H "Content-Type: appl
 **Monitoring report and dashboard** (prints a status table; open `monitoring/dashboard.html` in a browser):
 
 ```bash
-python monitoring.py
+python -m monitoring.monitoring
 ```
 
 **Browse MLflow** (experiments, runs, registered models and aliases) at http://127.0.0.1:5000:
 
 ```bash
-mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
+mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db --port 5000
 ```
 
 **Tests:**
@@ -149,7 +146,7 @@ python -m pytest
 | Aspect | Implementation |
 |---|---|
 | Loggers | `logger = logging.getLogger(__name__)` in every module |
-| Handlers | Attached only by entry points (`run_all.py`, each module's `__main__`, `api/serve.py`) through `logging_config.configure_logging()`: console (stdout) + `logs/<entry-point>.log` |
+| Handlers | Attached only by entry points (`run_all.py`, each module's `__main__`, `deployment/serve.py`) through `logging_config.configure_logging()`: console (stdout) + `logs/<entry-point>.log` |
 | Format | `%(asctime)s \| %(levelname)-8s \| %(module)s \| %(message)s` |
 | DEBUG | Intermediate values: quartile thresholds, k-selection scores, epoch losses, scaling parameters, integrity ranges |
 | INFO | Milestones: data loaded, model trained or registered, figure or report saved, API requests, monitoring PASS |

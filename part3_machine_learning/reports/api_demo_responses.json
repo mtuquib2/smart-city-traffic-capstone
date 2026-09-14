@@ -8,7 +8,7 @@
     "status_code": 200,
     "response": {
       "status": "ok",
-      "uptime_seconds": 14.1,
+      "uptime_seconds": 0.0,
       "models": {
         "traffic-volume-regressor": "3",
         "traffic-risk-classifier": "4"
@@ -80,7 +80,7 @@
     },
     "status_code": 200,
     "response": {
-      "prediction_id": "abfbe53f-f0c6-46d7-9843-1f56368c340e",
+      "prediction_id": "5a50bb82-6b35-44ee-a0af-4ad16907b15b",
       "predicted_volume": 6007,
       "congestion_category": "Severe",
       "model": "hist_gradient_boosting_v1",
@@ -101,7 +101,7 @@
     },
     "status_code": 200,
     "response": {
-      "prediction_id": "25ddc97b-f396-48e8-8f8f-b5456557b4e5",
+      "prediction_id": "e58f7898-c4bc-4334-8800-3b5cb23b8650",
       "predicted_volume": 63,
       "congestion_category": "Low",
       "model": "hist_gradient_boosting_v1",
@@ -121,7 +121,7 @@
     },
     "status_code": 200,
     "response": {
-      "prediction_id": "2c83c723-fab4-4581-bc23-ed628e6155ed",
+      "prediction_id": "5f9fe144-95ed-48c5-9c24-003a741ea751",
       "probability": 0.9963,
       "high_risk": true,
       "decision_threshold": 0.8337,
@@ -143,7 +143,7 @@
     },
     "status_code": 200,
     "response": {
-      "prediction_id": "e4651f17-5004-4727-8d41-33192dbd5384",
+      "prediction_id": "2a534fa3-1c23-4bdc-acd4-5b79b4c86652",
       "probability": 0.0031,
       "high_risk": false,
       "decision_threshold": 0.8337,

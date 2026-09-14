@@ -1,6 +1,6 @@
 # Model Versions
 
-Generated from `models/model_registry.json`, which mirrors the MLflow Model Registry in `mlflow.db`.
+Generated from `models/model_registry.json`, which mirrors the MLflow Model Registry in `mlflow/mlflow.db`.
 The version tagged **champion** is the one served by the API. Champions are selected on the
 **validation** split (2017); test metrics (Jan–Sep 2018) are reported for transparency only.
 

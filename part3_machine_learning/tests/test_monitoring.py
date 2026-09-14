@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from monitoring import evaluate_batch, psi_categorical, psi_numeric
+from monitoring.monitoring import evaluate_batch, psi_categorical, psi_numeric
 
 
 def test_psi_is_near_zero_for_same_distribution_and_large_for_shift():
