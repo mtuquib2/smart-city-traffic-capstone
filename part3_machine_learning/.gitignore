@@ -1,0 +1,8 @@
+# Regenerable intermediate data (rebuild with `python run_all.py` or `python data_prep.py`)
+data/*.csv
+
+# Scratch MLflow stores created by ad-hoc runs; the committed store is mlflow.db + mlartifacts/
+mlruns/
+
+# API prediction audit log grows with every request; a sample is kept in logs/
+monitoring/api_predictions.jsonl
