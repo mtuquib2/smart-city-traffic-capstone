@@ -44,6 +44,9 @@ def run(base_url: str | None = None) -> list[dict]:
     if base_url:
         client_cm = httpx.Client(base_url=base_url, timeout=30)
     else:
+        import warnings
+
+        warnings.filterwarnings("ignore", message="Using `httpx` with `starlette.testclient` is deprecated")
         from fastapi.testclient import TestClient
 
         from api.app import app
