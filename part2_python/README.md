@@ -13,17 +13,18 @@ traffic banding identified there are re-created programmatically, tested and ext
 ## Project structure
 
 ```
-capstone_part2/
+part2_python/
 ├── pipeline.py               # ENTRY POINT: load -> validate -> clean -> features -> figures
 ├── feature_engineering.py    # Task 2: time, weather, scaled and target features
 ├── visualizations.py         # Task 3: seven Matplotlib figures
-├── traffic_app.py            # Task 4: command-line query application (second entry point)
+├── cli_app/
+│   └── traffic_app.py        # Task 4: command-line query application (second entry point)
 ├── data/
 │   ├── raw/Metro_Interstate_Traffic_Volume.csv   # original, untouched input
 │   └── processed/            # traffic_clean.csv, traffic_features.csv (generated, git-ignored)
 ├── figures/                  # fig01 ... fig07 PNGs (generated, committed for review)
+├── pipeline.log              # sample normal run (INFO) - review without re-running
 ├── logs/
-│   ├── pipeline.log              # sample normal run (INFO)
 │   ├── pipeline_debug.log        # sample run with --log-level DEBUG
 │   ├── pipeline_error_example.log# sample failed run (missing input file)
 │   └── app.log                   # sample CLI session incl. invalid input
@@ -47,7 +48,7 @@ pip install -r requirements.txt
 
 Run all commands from the project root.
 
-**1. Run the full pipeline** (writes `data/processed/`, `figures/`, `logs/pipeline.log`):
+**1. Run the full pipeline** (writes `data/processed/`, `figures/`, `pipeline.log`):
 
 ```bash
 python pipeline.py
@@ -56,7 +57,7 @@ python pipeline.py
 | Option | Purpose |
 |---|---|
 | `--log-level DEBUG` | Also log intermediate values (thresholds, medians, scaling parameters) |
-| `--log-file PATH` | Write the log somewhere else (default `logs/pipeline.log`) |
+| `--log-file PATH` | Write the log somewhere else (default `pipeline.log`) |
 | `--input PATH` | Use a different raw CSV |
 | `--skip-figures` | Run cleaning and feature engineering only |
 
@@ -65,18 +66,18 @@ The process exits with code `0` on success and `1` if any stage fails (after log
 **2. Query the processed data with the CLI app:**
 
 ```bash
-python traffic_app.py lookup --datetime "2017-12-25 17:00"      # traffic + weather for an hour
-python traffic_app.py peaks --top 5 --day-type workday           # busiest day/hour slots
-python traffic_app.py compare                                    # workday vs weekend
-python traffic_app.py recommend --day friday --start 7 --end 19  # quietest hours to travel
-python traffic_app.py weather --condition snow                   # weather impact on traffic
-python traffic_app.py --help                                     # full usage
+python cli_app/traffic_app.py lookup --datetime "2017-12-25 17:00"      # traffic + weather for an hour
+python cli_app/traffic_app.py peaks --top 5 --day-type workday           # busiest day/hour slots
+python cli_app/traffic_app.py compare                                    # workday vs weekend
+python cli_app/traffic_app.py recommend --day friday --start 7 --end 19  # quietest hours to travel
+python cli_app/traffic_app.py weather --condition snow                   # weather impact on traffic
+python cli_app/traffic_app.py --help                                     # full usage
 ```
 
 Example output:
 
 ```
-$ python traffic_app.py recommend --day friday --start 7 --end 19
+$ python cli_app/traffic_app.py recommend --day friday --start 7 --end 19
 Recommended travel times on Friday between 07:00 and 19:59 (non-holiday):
   1. 19:00-19:59  ~3,664 vehicles/hour  (usually High)
   2. 10:00-10:59  ~4,593 vehicles/hour  (usually High)
@@ -100,11 +101,11 @@ python -m pytest
 | Aspect | Implementation |
 |---|---|
 | Loggers | Every module calls `logger = logging.getLogger(__name__)`; no module logs through the bare root logger. |
-| Handlers | Configured **only in the entry points** (`configure_logging()` in `pipeline.py` and `traffic_app.py`). Each attaches a console `StreamHandler` and a `FileHandler` to the root logger, so records from `feature_engineering` and `visualizations` propagate to both. |
-| Where logs go | Pipeline: console (stdout) + `logs/pipeline.log`, overwritten each run so the file is a single clean audit trail. App: console (stderr, keeping command answers on stdout clean) + `logs/app.log`, appended so it holds a history of queries. |
+| Handlers | Configured **only in the entry points** (`configure_logging()` in `pipeline.py` and `cli_app/traffic_app.py`). Each attaches a console `StreamHandler` and a `FileHandler` to the root logger, so records from `feature_engineering` and `visualizations` propagate to both. |
+| Where logs go | Pipeline: console (stdout) + `pipeline.log`, overwritten each run so the file is a single clean audit trail. App: console (stderr, keeping command answers on stdout clean) + `logs/app.log`, appended so it holds a history of queries. |
 | Format | `%(asctime)s \| %(levelname)-8s \| %(module)s \| %(message)s`<br>e.g. `2026-09-14 14:04:40 \| WARNING  \| pipeline \| Imputed 10 row(s) in 'temp' with monthly median: ...` |
 | Level selection | `--log-level {DEBUG,INFO,WARNING,ERROR}` (default `INFO`). DEBUG records are emitted only when DEBUG is selected. |
-| `print()` | Used only in `traffic_app.py` to show the answer to a command. All progress/status reporting uses logging. |
+| `print()` | Used only in `cli_app/traffic_app.py` to show the answer to a command. All progress/status reporting uses logging. |
 
 ### What each level means in this project
 
@@ -115,7 +116,7 @@ python -m pytest
 | **WARNING** | Unexpected but recoverable data changes, always with **row count and reason** | `Dropped 17 row(s) in duplicate removal: exact duplicate records`; `Imputed 1 row(s) in 'rain_1h' with monthly median: rainfall ... above 305 mm/h`; lookup falling back to the nearest hour |
 | **ERROR** | The pipeline or command cannot continue as planned | `Pipeline aborted: Raw data file not found: ...` (with `exc_info=True` traceback in the log); CLI `Invalid input for 'lookup': Malformed date/time ...` |
 
-Sample logs are committed in `logs/` so graders can review the behaviour without re-running.
+Sample logs are committed (`pipeline.log` plus debug, error and app samples in `logs/`) so graders can review the behaviour without re-running.
 
 ---
 
@@ -194,7 +195,7 @@ thresholds (and scaling parameters) should be fitted on training data only to av
 To publish to GitHub:
 
 ```bash
-git remote add origin https://github.com/<your-username>/capstone_part2.git
+git remote add origin https://github.com/<your-username>/smart-city-traffic-capstone.git
 ```
 
 ```bash

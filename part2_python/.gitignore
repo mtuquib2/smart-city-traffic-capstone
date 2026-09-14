@@ -9,9 +9,9 @@ venv/
 # Regenerable pipeline outputs (re-create with `python pipeline.py`)
 data/processed/*.csv
 
-# Logs are regenerated on every run; only curated samples in logs/ are tracked
+# Logs are regenerated on every run; only the curated samples are tracked
 *.log
-!logs/pipeline.log
+!pipeline.log
 !logs/pipeline_debug.log
 !logs/pipeline_error_example.log
 !logs/app.log

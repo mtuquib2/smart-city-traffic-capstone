@@ -7,7 +7,7 @@
 Part 1 explored this dataset interactively in Power BI. Part 2 rebuilds that analysis as a
 reproducible Python workflow: a logged, multi-stage pipeline that validates and cleans the raw
 data, engineers ML-ready features, produces explanatory figures and exposes the results through a
-command-line application. Every data change is traceable in `logs/pipeline.log`.
+command-line application. Every data change is traceable in `pipeline.log`.
 
 ## 2. Methodology
 
@@ -69,7 +69,7 @@ which gives four balanced, data-driven classes that extend Part 1's three bands.
 * Weather-responsive operations should trigger on **snow and freezing precipitation**. Rain alone does
   not justify intervention on volume grounds, although it may for safety reasons.
 * Travellers with flexibility gain the most by shifting to 10:00–11:00 or after 19:00. The
-  `recommend` command in `traffic_app.py` puts this into practice for any day.
+  `recommend` command in `cli_app/traffic_app.py` puts this into practice for any day.
 
 ## 5. Limitations and next steps
 

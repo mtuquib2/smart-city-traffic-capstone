@@ -1,4 +1,4 @@
-"""Tests for the traffic_app.py command-line application (run with `pytest`)."""
+"""Tests for the cli_app/traffic_app.py command-line application (run with `pytest`)."""
 
 import logging
 import sys
@@ -9,6 +9,7 @@ import pandas as pd
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cli_app"))
 
 import feature_engineering as fe  # noqa: E402
 import traffic_app  # noqa: E402

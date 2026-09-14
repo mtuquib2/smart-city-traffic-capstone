@@ -52,7 +52,7 @@ DEFAULT_INPUT = PROJECT_ROOT / "data" / "raw" / "Metro_Interstate_Traffic_Volume
 DEFAULT_CLEAN_OUTPUT = PROJECT_ROOT / "data" / "processed" / "traffic_clean.csv"
 DEFAULT_FEATURES_OUTPUT = PROJECT_ROOT / "data" / "processed" / "traffic_features.csv"
 DEFAULT_FIGURES_DIR = PROJECT_ROOT / "figures"
-DEFAULT_LOG_FILE = PROJECT_ROOT / "logs" / "pipeline.log"
+DEFAULT_LOG_FILE = PROJECT_ROOT / "pipeline.log"
 
 LOG_FORMAT = "%(asctime)s | %(levelname)-8s | %(module)s | %(message)s"
 LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -584,7 +584,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--figures-dir", type=Path, default=DEFAULT_FIGURES_DIR, help="Directory for saved figures")
     parser.add_argument("--skip-figures", action="store_true", help="Run cleaning and features only")
-    parser.add_argument("--log-file", type=Path, default=DEFAULT_LOG_FILE, help="Log file path (default logs/pipeline.log)")
+    parser.add_argument("--log-file", type=Path, default=DEFAULT_LOG_FILE, help="Log file path (default pipeline.log)")
     parser.add_argument(
         "--log-level",
         default="INFO",
