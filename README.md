@@ -64,7 +64,11 @@ MLflow · FastAPI / uvicorn / pydantic · pytest · Git
 ## Quick start
 
 ```bash
-cd part2_python
+git clone https://github.com/mtuquib2/Capstone-Project-Smart-City-Traffic-Intelligence-From-Data-Analytics-to-AI-Powered-Mobility.git
+```
+
+```bash
+cd Capstone-Project-Smart-City-Traffic-Intelligence-From-Data-Analytics-to-AI-Powered-Mobility/part2_python
 ```
 
 ```bash

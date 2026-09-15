@@ -192,12 +192,5 @@ thresholds (and scaling parameters) should be fitted on training data only to av
 * The pipeline is deterministic (no random sampling), so reruns produce identical outputs.
 * Git history has one descriptive commit per task (scaffold → Task 1 → Task 2 → Task 3 → Task 4 → Task 5).
 
-To publish to GitHub:
-
-```bash
-git remote add origin https://github.com/<your-username>/smart-city-traffic-capstone.git
-```
-
-```bash
-git push -u origin main
-```
+This part is published as `part2_python/` in the capstone portfolio repository:
+https://github.com/mtuquib2/Capstone-Project-Smart-City-Traffic-Intelligence-From-Data-Analytics-to-AI-Powered-Mobility
