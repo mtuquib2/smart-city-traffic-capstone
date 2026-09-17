@@ -193,4 +193,4 @@ thresholds (and scaling parameters) should be fitted on training data only to av
 * Git history has one descriptive commit per task (scaffold → Task 1 → Task 2 → Task 3 → Task 4 → Task 5).
 
 This part is published as `part2_python/` in the capstone portfolio repository:
-https://github.com/mtuquib2/Capstone-Project-Smart-City-Traffic-Intelligence-From-Data-Analytics-to-AI-Powered-Mobility
+https://github.com/mtuquib2/smart-city-traffic-capstone
